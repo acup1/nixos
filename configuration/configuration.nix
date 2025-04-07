@@ -104,66 +104,6 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   nixpkgs.config.allowUnfree = true;
-  environment.systemPackages = with pkgs; [
-    #vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    hyprlock
-    wget
-    unzip
-    gcc
-    rocmPackages_5.llvm.clang
-    go
-    cargo
-    gnumake42
-    #wl-clipboard-rs
-    wl-clipboard-x11
-    xclip
-    fzf
-    telegram-desktop
-    brightnessctl
-    playerctl
-    zsh
-    alacritty
-    ghostty
-    git
-    waybar
-    rofi-wayland
-    hyprpaper
-    tor-browser
-    networkmanagerapplet
-    swaynotificationcenter
-    cava
-    neofetch
-    yazi
-    btop
-    grim
-    slurp
-    grimblast
-    gimp
-    octaveFull
-    gfortran
-    libreoffice-qt6-fresh
-    protonplus
-    bottles
-    cmatrix
-    pipes-rs
-    qbittorrent
-    qalculate-gtk
-    python3Full
-    fxlinuxprint
-    cups
-    hal-hardware-analyzer
-    usbutils
-    dmg2img
-    p7zip
-    nodejs
-    nwg-dock-hyprland
-    kdePackages.calligra
-    onlyoffice-desktopeditors
-    obs-studio
-    wineWowPackages.waylandFull
-    wpsoffice-cn
-    neovide
-  ];
 
   #programs.nvf = {
   #  enable = true;

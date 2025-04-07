@@ -7,5 +7,6 @@
 in {
   environment.systemPackages = with pkgs; [
     (flake.packages.${system}.default or (throw "Package 'default' not found in the flake"))
+    neovide
   ];
 }
