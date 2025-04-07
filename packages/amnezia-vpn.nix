@@ -1,5 +1,5 @@
-{nixpkgs, ...}: {
-  environment.systemPackages = with nixpkgs; [
+{pkgs, ...}: {
+  environment.systemPackages = with pkgs; [
     amnezia-vpn
   ];
 

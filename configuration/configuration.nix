@@ -6,9 +6,7 @@
   pkgs,
   inputs,
   ...
-}: let
-  unstable = import <nixos-unstable> {config = {allowUnfree = true;};};
-in {
+}: {
   #imports = [
   #  # Include the results of the hardware scan.
   #  ./hardware-configuration.nix
@@ -163,19 +161,8 @@ in {
     onlyoffice-desktopeditors
     obs-studio
     wineWowPackages.waylandFull
-    #unstable.wpsoffice
-    matlab
     wpsoffice-cn
     neovide
-  ];
-
-  nixpkgs.overlays = [
-    inputs.nix-matlab.overlay
-    (
-      final: prev: {
-        # Your own overlays...
-      }
-    )
   ];
 
   #programs.nvf = {
@@ -195,7 +182,7 @@ in {
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
-      unstable.libgbm
+      libgbm
     ];
   };
   #environment.systemPackages = with unstable-pkgs; [

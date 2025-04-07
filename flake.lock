@@ -1,42 +1,5 @@
 {
   "nodes": {
-    "flake-compat": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1733328505,
-        "narHash": "sha256-NeCCThCEP3eCl2l/+27kNNK7QrwZB1IJCrXfrbv5oqU=",
-        "owner": "edolstra",
-        "repo": "flake-compat",
-        "rev": "ff81ac966bb2cae68946d5ed5fc4994f96d0ffec",
-        "type": "github"
-      },
-      "original": {
-        "owner": "edolstra",
-        "repo": "flake-compat",
-        "type": "github"
-      }
-    },
-    "nix-matlab": {
-      "inputs": {
-        "flake-compat": "flake-compat",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1743606114,
-        "narHash": "sha256-l2jmmuLdzj+fCMQoCzUZYxplqxiTNaJ8Qbur/tMN2Qg=",
-        "owner": "doronbehar",
-        "repo": "nix-matlab",
-        "rev": "75c431b3ef1f73e94723e80ae484e59f4cdfcca7",
-        "type": "gitlab"
-      },
-      "original": {
-        "owner": "doronbehar",
-        "repo": "nix-matlab",
-        "type": "gitlab"
-      }
-    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1743448293,
@@ -55,7 +18,6 @@
     },
     "root": {
       "inputs": {
-        "nix-matlab": "nix-matlab",
         "nixpkgs": "nixpkgs"
       }
     }
