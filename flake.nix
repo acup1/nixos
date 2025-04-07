@@ -18,9 +18,9 @@
     nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
       modules =
         [
-          ./configuration/configuration.nix
-          ./configuration/hardware-configuration.nix
         ]
+        ++ (nixpkgs.lib.filesystem.listFilesRecursive ./configuration)
+        ++ (nixpkgs.lib.filesystem.listFilesRecursive ./packages)
         ++ (nixpkgs.lib.filesystem.listFilesRecursive ./modules);
       specialArgs = {inherit self inputs;};
     };
