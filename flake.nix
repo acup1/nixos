@@ -20,7 +20,7 @@
     nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
       modules = [
         ./configuration.nix
-        ./nvf/nvf.nix
+        ./modules
       ];
       specialArgs = {inherit self inputs;};
     };
