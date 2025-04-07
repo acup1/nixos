@@ -170,7 +170,7 @@ in {
     matlab
     wpsoffice-cn
     inputs.zen.packages.${system}.default
-    inputs.nvf.packages.${system}.default
+    #inputs.nvf.packages.${system}.default
     neovide
   ];
   fonts.packages = with pkgs; [

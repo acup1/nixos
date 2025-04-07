@@ -1,5 +1,5 @@
 {
-  description = "XYU";
+  description = "cups nixos";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
@@ -10,18 +10,19 @@
     };
 
     zen.url = "github:youwen5/zen-browser-flake";
-
-    nvf.url = "./nvf/";
-
   };
 
-  outputs = { self, nixpkgs, ... } @ inputs: {
-
+  outputs = {
+    self,
+    nixpkgs,
+    ...
+  } @ inputs: {
     nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
       modules = [
         ./configuration.nix
+        ./nvf/nvf.nix
       ];
-      specialArgs = { inherit self inputs; };
+      specialArgs = {inherit self inputs;};
     };
   };
 }
