@@ -1,0 +1,27 @@
+{
+  description = "XYU";
+
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+
+    nix-matlab = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "gitlab:doronbehar/nix-matlab";
+    };
+
+    zen.url = "github:youwen5/zen-browser-flake";
+
+    nvf.url = "./nvf/";
+
+  };
+
+  outputs = { self, nixpkgs, ... } @ inputs: {
+
+    nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
+      modules = [
+        ./configuration.nix
+      ];
+      specialArgs = { inherit self inputs; };
+    };
+  };
+}
