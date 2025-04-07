@@ -141,7 +141,6 @@ in {
     slurp
     grimblast
     gimp
-    unstable.amnezia-vpn
     octaveFull
     gfortran
     libreoffice-qt6-fresh
