@@ -56,5 +56,6 @@
     obs-studio
     wineWowPackages.waylandFull
     wpsoffice-cn
+    github-desktop
   ];
 }
