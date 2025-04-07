@@ -9,12 +9,10 @@
 }: let
   unstable = import <nixos-unstable> {config = {allowUnfree = true;};};
 in {
-  imports = [
-    # Include the results of the hardware scan.
-    ./hardware-configuration.nix
-    #./zen.nix
-    #inputs.nvf.nixosModules.default
-  ];
+  #imports = [
+  #  # Include the results of the hardware scan.
+  #  ./hardware-configuration.nix
+  #];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -169,8 +167,6 @@ in {
     #unstable.wpsoffice
     matlab
     wpsoffice-cn
-    inputs.zen.packages.${system}.default
-    #inputs.nvf.packages.${system}.default
     neovide
   ];
   fonts.packages = with pkgs; [

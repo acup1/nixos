@@ -8,8 +8,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "gitlab:doronbehar/nix-matlab";
     };
-
-    zen.url = "github:youwen5/zen-browser-flake";
   };
 
   outputs = {
@@ -18,10 +16,12 @@
     ...
   } @ inputs: {
     nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
-      modules = [
-        ./configuration.nix
-        ./modules
-      ];
+      modules =
+        [
+          ./configuration/configuration.nix
+          ./configuration/hardware-configuration.nix
+        ]
+        ++ (nixpkgs.lib.filesystem.listFilesRecursive ./modules);
       specialArgs = {inherit self inputs;};
     };
   };
