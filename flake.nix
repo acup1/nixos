@@ -4,8 +4,9 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
-    nvf.url = "github:acup1/nvf";
-    zen.url = "github:youwen5/zen-browser-flake";
+    imports = [
+      ./modules.nix
+    ];
   };
 
   outputs = {
