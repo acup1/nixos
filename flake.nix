@@ -3,7 +3,7 @@
 
   inputs =
     (import ./modules.nix)
-    {
+    // {
       nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     };
 
