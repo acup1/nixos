@@ -1,13 +1,11 @@
 {
   description = "cups nixos";
 
-  inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-
-    imports = [
-      ./modules.nix
-    ];
-  };
+  inputs =
+    (import ./modules.nix)
+    {
+      nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    };
 
   outputs = {
     self,
