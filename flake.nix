@@ -2,9 +2,11 @@
   description = "cups nixos";
 
   inputs =
-    (import ./modules.nix)
-    // {
+    #(import ./modules.nix)
+    {
       nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+
+      nix-gaming.url = "github:fufexan/nix-gaming";
     };
 
   outputs = {
