@@ -5,8 +5,6 @@
     #(import ./modules.nix)
     {
       nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-
-      nix-gaming.url = "github:fufexan/nix-gaming";
     };
 
   outputs = {
