@@ -57,6 +57,5 @@
     wineWowPackages.waylandFull
     wpsoffice-cn
     github-desktop
-    darling
   ];
 }
