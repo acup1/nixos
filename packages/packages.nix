@@ -33,7 +33,6 @@
     slurp
     grimblast
     gimp
-    octaveFull
     gfortran
     libreoffice-qt6-fresh
     protonplus
