@@ -132,11 +132,11 @@
         "nvf": "nvf_2"
       },
       "locked": {
-        "lastModified": 1744850752,
-        "narHash": "sha256-CZP4V7fxFqUssoriqfLW6dOy8mhF4RkGauF228PwNB8=",
+        "lastModified": 1744891909,
+        "narHash": "sha256-0LDLq25CqqaVOPnfmMId/raNFzVBHTSDbqYUJYL5inI=",
         "owner": "acup1",
         "repo": "nvf",
-        "rev": "aee7ef061e11cd6750d701675285f723822e777b",
+        "rev": "17f577381f9d7176f688b3a4b06a7a82fcb14a7e",
         "type": "github"
       },
       "original": {
