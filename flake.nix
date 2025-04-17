@@ -5,6 +5,7 @@
     #(import ./modules.nix)
     {
       nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+      nvf.url = "github:acup1/nvf";
     };
 
   outputs = {
