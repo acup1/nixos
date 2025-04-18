@@ -41,7 +41,6 @@
     pipes-rs
     qbittorrent
     qalculate-gtk
-    python3Full
     fxlinuxprint
     cups
     hal-hardware-analyzer
