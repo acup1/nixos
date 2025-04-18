@@ -1,9 +1,7 @@
 {pkgs, ...}: {
-  environment.systemPackages = with pkgs;
-    [
-      octaveFull
-    ]
-    ++ (with pkgs.python312Packages; [
-      sympy
-    ]);
+  environment.systemPackages = with pkgs; [
+    octaveFull
+    python312Packages.sympy
+    python313Packages.sympy
+  ];
 }
