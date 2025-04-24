@@ -32,7 +32,6 @@
     grim
     slurp
     grimblast
-    gimp
     gfortran
     libreoffice-qt6-fresh
     protonplus
