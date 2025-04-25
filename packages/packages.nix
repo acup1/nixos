@@ -54,4 +54,5 @@
     wpsoffice-cn
     github-desktop
   ];
+  xdg.enable = true;
 }
