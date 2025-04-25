@@ -7,5 +7,5 @@
   home.packages = with pkgs; [
     btop
   ];
-  xdg.configFile."btop".source = ../.config/btop;
+  xdg.configFile."btop".source = ../config/btop;
 }

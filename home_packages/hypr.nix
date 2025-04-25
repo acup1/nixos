@@ -4,5 +4,5 @@
   inputs,
   ...
 }: {
-  xdg.configFile."hypr".source = ../.config/hypr;
+  xdg.configFile."hypr".source = ../config/hypr;
 }
