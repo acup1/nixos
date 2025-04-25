@@ -19,7 +19,6 @@
     alacritty
     ghostty
     git
-    rofi-wayland
     hyprpaper
     tor-browser
     networkmanagerapplet
