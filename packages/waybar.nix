@@ -2,10 +2,7 @@
   environment.systemPackages = with pkgs; [
     waybar
   ];
-  home.file.".config/waybar".source = builtins.path {
-    path = ../.config/waybar;
-    name = "waybar-config";
-  };
+  home.folder.".config/waybar".source = ../.config/waybar;
   #xdg.configFile."waybar".source = builtins.path {
   #  path = ../.config/waybar;
   #  name = "waybar-config";
