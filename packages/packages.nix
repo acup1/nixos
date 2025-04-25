@@ -23,8 +23,6 @@
     tor-browser
     networkmanagerapplet
     neofetch
-    yazi
-    btop
     grim
     slurp
     grimblast

@@ -1,0 +1,20 @@
+[[manager.prepend_keymap]]
+on   = [ "g", "h" ]
+run  = "cd ~/.config/hypr"
+desc = "hypr folder"
+
+[[manager.prepend_keymap]]
+on   = [ "g", "1" ]
+run  = "cd ~/.config/HybridBar/"
+desc = "HybridBar folder"
+
+[[manager.prepend_keymap]]
+on   = [ "g", "~" ]
+run  = "cd ~"
+desc = "home folder"
+
+[[manager.prepend_keymap]]
+on   = [ "g", "2" ]
+run  = "cd ~/Documents/"
+desc = "Documents folder"
+
