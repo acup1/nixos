@@ -93,16 +93,16 @@
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.defaultUserShell = pkgs.zsh;
-  users.users.acup = {
-    isNormalUser = true;
-    description = "acup";
-    extraGroups = ["networkmanager" "wheel" "lp"];
-    packages = with pkgs; [
-      #  thunderbird
-    ];
-    home = "/run/media/disk/acup";
-  };
+  #users.defaultUserShell = pkgs.zsh;
+  #users.users.acup = {
+  #  isNormalUser = true;
+  #  description = "acup";
+  #  extraGroups = ["networkmanager" "wheel" "lp"];
+  #  packages = with pkgs; [
+  #    #  thunderbird
+  #  ];
+  #  home = "/run/media/disk/acup";
+  #};
 
   # Install firefox.
   programs.firefox.enable = true;

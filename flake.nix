@@ -16,15 +16,19 @@
     self,
     nixpkgs,
     ...
-  } @ inputs: {
+  } @ inputs: let
+    username = "acup";
+    system = "x86_64-linux";
+  in {
     nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
       modules =
         [
+          ./home.nix
         ]
         ++ (nixpkgs.lib.filesystem.listFilesRecursive ./configuration)
-        ++ (nixpkgs.lib.filesystem.listFilesRecursive ./packages)
+        ++ (inputs.nixpkgs.lib.filesystem.listFilesRecursive ./packages)
         ++ (nixpkgs.lib.filesystem.listFilesRecursive ./modules);
-      specialArgs = {inherit self inputs;};
+      specialArgs = {inherit self inputs system username;};
     };
   };
 }
