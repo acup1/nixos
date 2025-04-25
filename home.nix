@@ -16,7 +16,10 @@
       imports =
         [
         ]
-        ++ (inputs.nixpkgs.lib.filesystem.listFilesRecursive ./home_packages);
+        ++ (inputs.nixpkgs.lib.filesystem.listFilesRecursive ./home_packages)
+        ++ inputs.nixpkgs.fileset.toList (
+          inputs.nixpkgs.lib.fileset.fileFilter (file: file.name == "default.nix") ./home_packages
+        );
       home.username = "${username}";
       home.homeDirectory = "/home/${username}";
       home.stateVersion = "25.05";
