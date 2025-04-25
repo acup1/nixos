@@ -18,7 +18,7 @@
       fsType = "ext4";
     };
 
-  fileSystems."/run/media/disk" =
+  fileSystems."/home" =
     { device = "/dev/disk/by-uuid/da9e3465-b53f-4753-acef-eac1a4605ca4";
       fsType = "btrfs";
     };

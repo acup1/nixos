@@ -23,7 +23,6 @@
     hyprpaper
     tor-browser
     networkmanagerapplet
-    swaynotificationcenter
     neofetch
     yazi
     btop
@@ -53,5 +52,4 @@
     wpsoffice-cn
     github-desktop
   ];
-  xdg.enable = true;
 }

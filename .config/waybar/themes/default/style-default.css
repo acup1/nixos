@@ -1,10 +1,4 @@
-@import url('../color.css');
-
-@define-color foreground #c2c0c3;
-@define-color background #0c0311;
-@define-color cursor #c2c0c3;
-@define-color color7 #ffffff;
-@define-color color9 #b218c9;
+@import url('../../.cache/wal/colors-waybar.css');
 
 * {
     font-size:15px;
