@@ -1,11 +1,10 @@
-@import url('../color.css');
-
 @define-color mpris-album-art-overlay alpha(@background, 0.55);
 @define-color mpris-button-hover alpha(@background, 0.50);
 @define-color text @color15;
+@define-color background #161616;
 @define-color bg alpha(@background,.5);
 @define-color bg-hover alpha(@background,.8);
-@define-color mycolor @color9;
+@define-color mycolor #FF6F00;
 @define-color border-color alpha(@mycolor, 0.15);
 
 @keyframes fadeIn{
@@ -31,14 +30,14 @@
 .floating-notifications.background .notification-background .notification .notification-content {
 }
 .notification{
-    background: alpha(@mycolor,.5);
+    background: alpha(@bg,1);
 
 }
 
 .control-center .notification-row .notification-background .notification {
     margin-top: 0.150rem;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, .3);
-    background: alpha(@mycolor,.3);
+    background: alpha(@mycolor,1);
 
 }
 .floating-notifications .notification{
@@ -89,14 +88,14 @@
 
 .control-center .notification-row .notification-background .notification.critical .notification-content,
 .floating-notifications.background .notification-background .notification.critical .notification-content {
-    background-color: #ffb4a9;
+    background-color: #FFAB91;
 
 }
 
 .control-center .notification-row .notification-background .notification.critical .notification-content image,
 .floating-notifications.background .notification-background .notification.critical .notification-content image{
     background-color: unset;
-    color: #ffb4a9;
+    color: #FFAB91;
 
 }
 
@@ -169,7 +168,7 @@
 }
 
 .control-center {
-    background: @bg;
+    background: @background;
     color: @text;
     border-radius: 10px;
     border:none;
@@ -189,7 +188,7 @@
     font-size: initial;
     color: @text;
     text-shadow: none;
-    background: rgba(255,85,85,.3);
+    background: #FF6F00;
     border: none;
     box-shadow: none;
     border-radius: 12px;
@@ -269,8 +268,8 @@
 }
 .widget-buttons-grid {
     font-family:"CodeNewRoman Nerd Font Propo";
-    padding-left: 8px;
-    padding-right: 8px;
+    padding-left: 10px;
+    padding-right: 10px;
     padding-bottom: 8px;
     margin: 10px;
     border-radius: 12px;
