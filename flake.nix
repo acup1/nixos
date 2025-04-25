@@ -6,6 +6,10 @@
     {
       nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
       #nvf.url = "github:acup1/nvf";
+      home-manager = {
+        url = "github:nix-community/home-manager";
+        inputs.nixpkgs.follows = "nixpkgs";
+      };
     };
 
   outputs = {
