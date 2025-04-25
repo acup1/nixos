@@ -1,0 +1,6 @@
+[flavor]
+dark = "kanagawa"
+[filetype]
+rules = [
+	{ name = "*/", fg = "#B218C9" },
+]
