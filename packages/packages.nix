@@ -19,7 +19,6 @@
     alacritty
     ghostty
     git
-    waybar
     rofi-wayland
     hyprpaper
     tor-browser
