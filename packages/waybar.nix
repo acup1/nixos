@@ -7,6 +7,6 @@
   #  path = ../.config/waybar;
   #  name = "waybar-config";
   #};
-  xdg.configHome.folder."waybar".source = ../.config/waybar;
+  #xdg.configFolder."waybar".source = ../.config/waybar;
   #xdg.configFile."swaync/config.json".source = ./config.json;
 }

@@ -24,7 +24,6 @@
     tor-browser
     networkmanagerapplet
     swaynotificationcenter
-    cava
     neofetch
     yazi
     btop
