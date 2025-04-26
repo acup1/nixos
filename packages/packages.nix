@@ -3,11 +3,6 @@
     hyprlock
     wget
     unzip
-    gcc
-    rocmPackages_5.llvm.clang
-    go
-    cargo
-    gnumake42
     #wl-clipboard-rs
     wl-clipboard-x11
     xclip
@@ -26,8 +21,6 @@
     grim
     slurp
     grimblast
-    gfortran
-    libreoffice-qt6-fresh
     protonplus
     bottles
     cmatrix
@@ -38,15 +31,11 @@
     cups
     hal-hardware-analyzer
     usbutils
-    dmg2img
     p7zip
     nodejs
     nwg-dock-hyprland
-    kdePackages.calligra
-    onlyoffice-desktopeditors
     obs-studio
     wineWowPackages.waylandFull
-    wpsoffice-cn
     github-desktop
   ];
 }

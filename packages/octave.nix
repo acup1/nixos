@@ -1,11 +1,12 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
-    octaveFull.withPackages
-    (ps:
-      with ps; [
-        control
-        signal
-        symbolic
-      ])
+    (
+      octaveFull.withPackages
+      (ps:
+        with ps; [
+          signal
+          symbolic
+        ])
+    )
   ];
 }
