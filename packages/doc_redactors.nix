@@ -3,5 +3,6 @@
     libreoffice-qt6-fresh
     wpsoffice-cn
     texliveFull
+    xournalpp
   ];
 }
