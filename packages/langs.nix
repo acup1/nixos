@@ -7,7 +7,12 @@
     go
     cargo
     gnumake42
-    python314Full
+    (python3.withPachages (ps:
+      with ps; [
+        oct2py
+        jupyter
+        ipython
+      ]))
     gfortran
   ];
 }
