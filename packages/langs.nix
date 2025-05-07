@@ -7,7 +7,7 @@
     go
     cargo
     gnumake42
-    (python3.withPachages (ps:
+    (python3.withPackages (ps:
       with ps; [
         oct2py
         jupyter
