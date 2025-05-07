@@ -1,12 +1,17 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     (
-      octaveFull.withPackages
+      (octaveFull.override {
+        graphicsmagick = graphicsmagick.override {
+          quantumdepth = 32;
+        };
+      }).withPackages
       (ps:
         with ps; [
           signal
           symbolic
         ])
     )
+    ghostscript
   ];
 }
