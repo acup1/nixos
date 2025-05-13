@@ -9,7 +9,7 @@
     gnumake42
     (python3.withPackages (ps:
       with ps; [
-        oct2py
+        #oct2py
         jupyter
         ipython
       ]))

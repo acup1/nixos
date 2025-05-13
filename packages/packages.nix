@@ -7,7 +7,6 @@
     wl-clipboard-x11
     xclip
     fzf
-    telegram-desktop
     brightnessctl
     playerctl
     zsh
