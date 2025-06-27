@@ -57,10 +57,12 @@
 
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  # services.xserver.displayManager.sddm.enable = true;
+  # services.xserver.desktopManager.gnome.enable = true;
 
   # Hyprland
   programs.hyprland.enable = true;
+  #services.desktopManager.sddm.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -69,7 +71,28 @@
   };
 
   # Enable CUPS to print documents.
+  services.avahi = {
+    enable = true;
+    nssmdns = true;
+    openFirewall = true;
+    publish = {
+      enable = true;
+      userServices = true;
+    };
+  };
+  services.printing = {
+    listenAddresses = ["*:631"];
+    allowFrom = ["all"];
+    browsing = true;
+    defaultShared = true;
+    openFirewall = true;
+  };
   services.printing.enable = true;
+  services.printing.drivers = [
+    pkgs.gutenprint
+    pkgs.hplip
+  ];
+  programs.system-config-printer.enable = true;
 
   # Enable sound with pipewire.
   programs.zsh.enable = true;

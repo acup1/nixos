@@ -36,5 +36,9 @@
     obs-studio
     wineWowPackages.waylandFull
     github-desktop
+
+    linuxKernel.packages.linux_zen.cpupower
+    vlc
+    nautilus
   ];
 }
