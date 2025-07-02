@@ -3,5 +3,6 @@
     teams-for-linux
     telegram-desktop
     discord
+    discord-canary
   ];
 }
