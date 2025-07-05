@@ -24,6 +24,7 @@
       modules =
         [
           ./home.nix
+          ./programs/default.nix
         ]
         ++ (nixpkgs.lib.filesystem.listFilesRecursive ./configuration)
         ++ (inputs.nixpkgs.lib.filesystem.listFilesRecursive ./packages)
