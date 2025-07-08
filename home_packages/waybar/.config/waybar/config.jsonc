@@ -1,0 +1,40 @@
+{
+  "layer":"top",
+  "height":32,
+  "spacing":5,
+
+  "margin-top":7,
+  "margin-left":7,
+  "margin-right":7,
+
+  "modules-left":[
+    "hyprland/workspaces",
+  ],
+  "modules-center": [
+  ],
+  "modules-right": [
+    "tray",
+    "clock",
+    "hyprland/language",
+  ],
+
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "format-icons": {
+      "active": " ",
+      "default": " "
+    },
+  },
+
+  "tray":{
+    "spacing":5,
+  },
+  "hyprland/language": {
+    "format-en": "EN",
+    "format-ru": "RU",
+  },
+  "clock": {
+    "format": "{:%H:%M}",
+    "tooltip-format": "{:%A, %B %d, %Y (%R)}",
+  },
+}

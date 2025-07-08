@@ -32,7 +32,6 @@
     usbutils
     p7zip
     nodejs
-    nwg-dock-hyprland
     obs-studio
     wineWowPackages.waylandFull
     github-desktop
