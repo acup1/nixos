@@ -128,6 +128,11 @@
   # Install firefox.
   programs.firefox.enable = true;
 
+  #vvirtualisation
+  virtualisation.virtualbox.host.enable = true;
+  users.extraGroups.vboxusers.members = ["acup"];
+  boot.kernelParams = ["kvm.enable_virt_at_load=0"];
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   nixpkgs.config.allowUnfree = true;

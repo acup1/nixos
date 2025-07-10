@@ -11,11 +11,12 @@
     "hyprland/workspaces",
   ],
   "modules-center": [
+    "clock",
   ],
   "modules-right": [
     "tray",
-    "clock",
     "hyprland/language",
+    "battery"
   ],
 
   "hyprland/workspaces": {
@@ -37,4 +38,14 @@
     "format": "{:%H:%M}",
     "tooltip-format": "{:%A, %B %d, %Y (%R)}",
   },
+  "battery": {
+    "interval": 60,
+    "states": {
+        "warning": 20,
+        "critical": 10
+    },
+    "format": "{capacity}% {icon}",
+    "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+    "max-length": 25
+  }
 }

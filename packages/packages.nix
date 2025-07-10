@@ -11,7 +11,6 @@
     playerctl
     zsh
     alacritty
-    ghostty
     git
     hyprpaper
     tor-browser

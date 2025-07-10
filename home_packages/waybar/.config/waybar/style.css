@@ -2,13 +2,13 @@ window#waybar{
   background: none;
 }
 
-#workspaces, #tray, #clock, #language{
+#workspaces, #tray, #clock, #language, #battery{
   border: 2px solid #ffffff;
   border-radius: 10;
   background: #000000;
 }
 
-#tray, #clock, #language{
+#tray, #clock, #language, #battery{
   padding-left: 5;
   padding-right: 5;
 }

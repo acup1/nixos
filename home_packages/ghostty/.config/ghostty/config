@@ -1,0 +1,17 @@
+theme=Pro
+window-theme=auto
+window-decoration=false
+background-opacity=0.8
+background-blur-radius=10
+confirm-close-surface = false
+#initial-command=zfetch && zsh
+shell-integration = zsh
+title="ghostty"
+keybind = ctrl+shift+e=new_split:right
+keybind = ctrl+shift+d=new_split:down
+keybind = ctrl+shift+w=unbind
+keybind = ctrl+shift+w=close_surface
+adjust-cursor-thickness = 2
+cursor-color = #999999
+cursor-opacity = 0.8
+font-family = "CodeNewRoman"
