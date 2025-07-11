@@ -8,5 +8,5 @@
     ghostty
   ];
   #xdg.configFile."waybar".source = ./.config/waybar;
-  xdg.configFile."ghostty".source = "./.config/ghostty/";
+  xdg.configFile."ghostty".source = ./.config/ghostty;
 }
