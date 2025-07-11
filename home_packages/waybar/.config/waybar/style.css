@@ -6,6 +6,11 @@ window#waybar{
   border: 2px solid #ffffff;
   border-radius: 10;
   background: #000000;
+  color: #ffffff;
+}
+
+#workspaces button{
+  color: #ffffff;
 }
 
 #tray, #clock, #language, #battery{
