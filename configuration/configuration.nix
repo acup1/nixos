@@ -7,10 +7,9 @@
   inputs,
   ...
 }: {
-  #imports = [
-  #  # Include the results of the hardware scan.
-  #  ./hardware-configuration.nix
-  #];
+  imports = [
+    /etc/nixos/hardware-configuration.nix
+  ];
 
   # Bootloader.
   #boot.loader.systemd-boot.enable = true;
