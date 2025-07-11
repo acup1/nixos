@@ -19,8 +19,6 @@
     grim
     slurp
     grimblast
-    protonplus
-    bottles
     cmatrix
     pipes-rs
     qbittorrent
