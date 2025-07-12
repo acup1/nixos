@@ -35,7 +35,6 @@
 
     vlc
     nautilus
-    nvidia-drivers
-    pkgs.pipewire
+    pipewire
   ];
 }

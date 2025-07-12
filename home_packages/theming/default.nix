@@ -12,7 +12,7 @@
     };
     theme = {
       package = pkgs.orchis-theme;
-      name = "Orchis-Grey-Dark-Compact";
+      name = "Orchis-Red-Dark-Compact";
     };
     iconTheme = {
       package = pkgs.kora-icon-theme;
