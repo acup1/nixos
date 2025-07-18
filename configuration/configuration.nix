@@ -104,7 +104,6 @@
   };
   services.passSecretService.enable = true;
 
-  # qwe
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
   nix.settings.experimental-features = ["nix-command" "flakes"];
