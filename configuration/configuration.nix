@@ -102,6 +102,7 @@
     pulse.enable = true;
     jack.enable = true;
   };
+  services.passSecretService.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
