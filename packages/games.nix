@@ -1,6 +1,7 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     gnome-sudoku
+    bottles
   ];
 
   programs.steam = {
