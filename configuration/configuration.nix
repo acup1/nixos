@@ -1,11 +1,10 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{
-  config,
-  pkgs,
-  inputs,
-  ...
+{ config
+, pkgs
+, inputs
+, ...
 }: {
   imports = [
     /etc/nixos/hardware-configuration.nix
@@ -78,8 +77,8 @@
     };
   };
   services.printing = {
-    listenAddresses = ["*:631"];
-    allowFrom = ["all"];
+    listenAddresses = [ "*:631" ];
+    allowFrom = [ "all" ];
     browsing = true;
     defaultShared = true;
     openFirewall = true;
@@ -106,7 +105,7 @@
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   #users.defaultUserShell = pkgs.zsh;
@@ -122,11 +121,12 @@
 
   # Install firefox.
   programs.firefox.enable = true;
-
+  programs.nix-ld.enable = true;
   #vvirtualisation
   virtualisation.virtualbox.host.enable = true;
-  users.extraGroups.vboxusers.members = ["acup"];
-  boot.kernelParams = ["kvm.enable_virt_at_load=0"];
+  users.extraGroups.vboxusers.members = [ "acup" ];
+  boot.kernelParams = [ "kvm.enable_virt_at_load=0" ];
+  boot.kernelModules = [ "cdc_acm" ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

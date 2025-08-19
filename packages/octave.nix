@@ -1,13 +1,11 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   environment.systemPackages = with pkgs; [
-    (
-      octaveFull.withPackages (
-        ps:
-          with ps; [
-            signal
-            symbolic
-          ]
-      )
-    )
+    (octaveFull.withPackages (
+      p:
+        with p; [
+          signal
+          symbolic
+        ]
+    ))
   ];
 }
