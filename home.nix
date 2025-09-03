@@ -1,17 +1,18 @@
-{
-  pkgs,
-  inputs,
-  username,
-  host,
-  system,
-  ...
+{ pkgs
+, inputs
+, username
+, host
+, system
+, ...
 }: {
-  imports = [inputs.home-manager.nixosModules.home-manager];
+  imports = [
+    inputs.home-manager.nixosModules.home-manager
+  ];
 
   home-manager = {
     useUserPackages = true;
     useGlobalPkgs = true;
-    extraSpecialArgs = {inherit inputs username host system;};
+    extraSpecialArgs = { inherit inputs username host system; };
     users.${username} = {
       imports =
         [
@@ -24,16 +25,39 @@
       home.stateVersion = "25.05";
       home.packages = with pkgs; [
         home-manager
+        #inputs.caelestia-shell.packages.${system}.default
       ];
       programs.home-manager.enable = true;
+
+      #programs.caelestia = {
+      #  enable = true;
+      #  systemd = {
+      #    enable = false; # if you prefer starting from your compositor
+      #    target = "graphical-session.target";
+      #    environment = [ ];
+      #  };
+      #  settings = {
+      #    bar.status = {
+      #      showBattery = false;
+      #    };
+      #    paths.wallpaperDir = "~/Images";
+      #  };
+      #  cli = {
+      #    enable = true; # Also add caelestia-cli to path
+      #    settings = {
+      #      theme.enableGtk = false;
+      #    };
+      #  };
+      #};
+
     };
   };
 
   users.users.${username} = {
     isNormalUser = true;
     description = "${username}";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.zsh;
   };
-  nix.settings.allowed-users = ["${username}"];
+  nix.settings.allowed-users = [ "${username}" ];
 }

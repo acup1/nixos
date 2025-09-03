@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{ pkgs
+, inputs
+, system
+, ...
+}: {
   environment.systemPackages = with pkgs; [
     hyprlock
     wget
@@ -36,5 +40,7 @@
     vlc
     nautilus
     pipewire
+    scdoc
+    #inputs.caelestia-shell.packages.${system}.default
   ];
 }
