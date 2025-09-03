@@ -18,3 +18,12 @@ on   = [ "g", "2" ]
 run  = "cd ~/Documents/"
 desc = "Documents folder"
 
+[[manager.prepend_keymap]]
+on   = [ "n", "n" ]
+run  = "shell 'nix-shell' --confirm"
+desc = "nix-shell"
+
+[[manager.prepend_keymap]]
+on   = [ "n", "s" ]
+run  = "shell 'zsh' --confirm"
+desc = "zsh"

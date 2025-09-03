@@ -1,3 +1,4 @@
+#custom-shader=shaders/sparks-from-fire.glsl
 theme=Pro
 window-theme=auto
 window-decoration=false

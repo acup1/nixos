@@ -1,6 +1,6 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   environment.systemPackages = with pkgs; [
-    (callPackage ./asciiss {})
+    (callPackage ./asciiss { })
     kitty
   ];
 }
