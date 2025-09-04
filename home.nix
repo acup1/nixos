@@ -16,7 +16,7 @@
     users.${username} = {
       imports =
         [
-        inputs.caelestia-shell.homeManagerModules.default
+          inputs.caelestia-shell.homeManagerModules.default
         ]
         ++ inputs.nixpkgs.lib.fileset.toList (
           inputs.nixpkgs.lib.fileset.fileFilter (file: file.name == "default.nix") ./home_packages
@@ -26,7 +26,6 @@
       home.stateVersion = "25.05";
       home.packages = with pkgs; [
         home-manager
-        #inputs.caelestia-shell.packages.${system}.default
       ];
       programs.home-manager.enable = true;
 
