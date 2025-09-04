@@ -16,6 +16,7 @@
     users.${username} = {
       imports =
         [
+        inputs.caelestia-shell.homeManagerModules.default
         ]
         ++ inputs.nixpkgs.lib.fileset.toList (
           inputs.nixpkgs.lib.fileset.fileFilter (file: file.name == "default.nix") ./home_packages
@@ -29,26 +30,25 @@
       ];
       programs.home-manager.enable = true;
 
-      #programs.caelestia = {
-      #  enable = true;
-      #  systemd = {
-      #    enable = false; # if you prefer starting from your compositor
-      #    target = "graphical-session.target";
-      #    environment = [ ];
-      #  };
-      #  settings = {
-      #    bar.status = {
-      #      showBattery = false;
-      #    };
-      #    paths.wallpaperDir = "~/Images";
-      #  };
-      #  cli = {
-      #    enable = true; # Also add caelestia-cli to path
-      #    settings = {
-      #      theme.enableGtk = false;
-      #    };
-      #  };
-      #};
+      programs.caelestia = {
+        enable = true;
+        systemd = {
+          enable = false; # if you prefer starting from your compositor
+          target = "graphical-session.target";
+          environment = [ ];
+        };
+        settings = {
+          bar.status = {
+            showBattery = true;
+          };
+        };
+        cli = {
+          enable = true; # Also add caelestia-cli to path
+          settings = {
+            theme.enableGtk = false;
+          };
+        };
+      };
 
     };
   };

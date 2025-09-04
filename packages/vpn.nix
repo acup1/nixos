@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     amnezia-vpn
-    hiddify-app
+    #hiddify-app
   ];
 
   programs.amnezia-vpn.enable = true;

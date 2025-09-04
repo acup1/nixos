@@ -1,7 +1,8 @@
-{ pkgs
-, inputs
-, system
-, ...
+{
+  pkgs,
+  inputs,
+  system,
+  ...
 }: {
   environment.systemPackages = with pkgs; [
     hyprlock
@@ -42,5 +43,9 @@
     pipewire
     scdoc
     #inputs.caelestia-shell.packages.${system}.default
+    comma
+  ];
+  nixpkgs.config.permittedInsecurePackages = [
+    "qtwebengine-5.15.19"
   ];
 }

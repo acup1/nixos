@@ -88,6 +88,7 @@
     pkgs.gutenprint
     pkgs.hplip
   ];
+  services.power-profiles-daemon.enable = true;
   programs.system-config-printer.enable = true;
 
   programs.zsh.enable = true;
