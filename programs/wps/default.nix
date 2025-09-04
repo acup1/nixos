@@ -1,51 +1,52 @@
-{
-  lib,
-  stdenv,
-  dpkg,
-  autoPatchelfHook,
-  alsa-lib,
-  at-spi2-core,
-  libtool,
-  libxkbcommon,
-  nspr,
-  mesa,
-  libtiff,
-  udev,
-  gtk3,
-  libsForQt5,
-  xorg,
-  cups,
-  pango,
-  libjpeg,
-  gtk2,
-  gdk-pixbuf,
-  libpulseaudio,
-  libbsd,
-  libusb1,
-  libmysqlclient,
-  llvmPackages,
-  dbus,
-  gcc-unwrapped,
-  freetype,
-  curl,
-  makeWrapper,
-  runCommandLocal,
-  cacert,
-  coreutils,
+{ lib
+, stdenv
+, dpkg
+, autoPatchelfHook
+, alsa-lib
+, at-spi2-core
+, libtool
+, libxkbcommon
+, nspr
+, mesa
+, libtiff
+, udev
+, gtk3
+, libsForQt5
+, xorg
+, cups
+, pango
+, libjpeg
+, gtk2
+, gdk-pixbuf
+, libpulseaudio
+, libbsd
+, libusb1
+, libmysqlclient
+, llvmPackages
+, dbus
+, gcc-unwrapped
+, freetype
+, curl
+, makeWrapper
+, runCommandLocal
+, cacert
+, coreutils
+, bzip2
+,
 }:
 let
-  pkgVersion = "12.1.0.17900";
-  url = "https://wps-linux-personal.wpscdn.cn/wps/download/ep/Linux2023/${lib.last (lib.splitVersion pkgVersion)}/wps-office_${pkgVersion}_amd64.deb";
-  hash = "sha256-o8njvwE/UsQpPuLyChxGAZ4euvwfuaHxs5pfUvcM7kI=";
+  pkgVersion = "12.1.2.22571";
+  url = "https://wps-linux-personal.wpscdn.cn/wps/download/ep/Linux2023/22571/wps-office_${pkgVersion}.AK.preread.sw_480057_amd64.deb";
+  hash = "sha256-oppJqiUEe/0xEWxgKVMPMFngjQ0e5xaac6HuFVIBh8I=";
   uri = builtins.replaceStrings [ "https://wps-linux-personal.wpscdn.cn" ] [ "" ] url;
   securityKey = "7f8faaaa468174dc1c9cd62e5f218a5b";
 in
 stdenv.mkDerivation rec {
-  pname = "wpsoffice-cn";
+  pname = "wps";
   version = pkgVersion;
 
   src =
-    runCommandLocal "wps-office_${version}_amd64.deb"
+    runCommandLocal "wps-office_${version}.AK.preread.sw_480057_amd64.deb"
       {
         outputHashMode = "recursive";
         outputHashAlgo = "sha256";
@@ -103,6 +104,7 @@ stdenv.mkDerivation rec {
     llvmPackages.openmp
     dbus
     libsForQt5.fcitx5-qt
+    (lib.getLib bzip2) # Use bzip2.lib output for libbz2.so
   ];
 
   dontWrapQtApps = true;
@@ -112,21 +114,19 @@ stdenv.mkDerivation rec {
     pango
     freetype
     gcc-unwrapped.lib
+    bzip2 # Add bzip2 to runtimeDependencies
   ];
 
   autoPatchelfIgnoreMissingDeps = [
-    # distribution is missing libkappessframework.so
     "libkappessframework.so"
-    # qt4 support is deprecated
     "libQtCore.so.4"
     "libQtNetwork.so.4"
     "libQtXml.so.4"
-    # file manager integration. Not needed
     "libnautilus-extension.so.1"
     "libcaja-extension.so.1"
     "libpeony.so.3"
-    # libuof.so is a exclusive library in WPS. No need to repatch it
     "libuof.so"
+    "libmysqlclient.so.18"
   ];
 
   installPhase = ''
@@ -135,19 +135,25 @@ stdenv.mkDerivation rec {
     mkdir -p $out
     cp -r opt $out
     cp -r usr/* $out
+    # Remove broken bzip2 symlinks from the deb package
+    rm -f $out/opt/kingsoft/wps-office/office6/libbz2.so
+    rm -f $out/opt/kingsoft/wps-office/office6/libbz2.so.1.0.4
+    # Create correct symlink to bzip2 library
+    ln -sf ${lib.getLib bzip2}/lib/libbz2.so.1 $out/opt/kingsoft/wps-office/office6/libbz2.so
+    ln -sf ${lib.getLib bzip2}/lib/libbz2.so.1 $out/opt/kingsoft/wps-office/office6/libbz2.so.1.0.4
     for i in wps wpp et wpspdf; do
       substituteInPlace $out/bin/$i \
-        --replace /opt/kingsoft/wps-office $prefix
+        --replace-fail /opt/kingsoft/wps-office $prefix
     done
-    for i in $out/share/applications/*;do
+    for i in $out/share/applications/*.desktop; do
       substituteInPlace $i \
-        --replace /usr/bin $out/bin
+        --replace-fail /usr/bin $out/bin
     done
-    # need system freetype and gcc lib to run properly
+    # Need system freetype, gcc lib, and bzip2 to run properly
     for i in wps wpp et wpspdf wpsoffice; do
       wrapProgram $out/opt/kingsoft/wps-office/office6/$i \
         --set LD_PRELOAD "${freetype}/lib/libfreetype.so" \
-        --set LD_LIBRARY_PATH "${lib.makeLibraryPath [ gcc-unwrapped.lib ]}"
+        --set LD_LIBRARY_PATH "${lib.makeLibraryPath [ gcc-unwrapped.lib (lib.getLib bzip2) ]}"
     done
     runHook postInstall
   '';
