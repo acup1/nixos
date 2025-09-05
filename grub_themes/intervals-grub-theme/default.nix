@@ -1,7 +1,6 @@
 { pkgs ? import <nixpkgs> { }, ... }:
 let
-  bg = ./background.png;
-  theme = ./theme.txt;
+  override = ./theme;
 in
 pkgs.stdenvNoCC.mkDerivation {
   name = "intervals-grub-theme";
@@ -18,8 +17,7 @@ pkgs.stdenvNoCC.mkDerivation {
 
     mkdir -p $out
     cp -r Intervals-window-grub-themes/1080p/Intervals-window/* $out/
-    cp -f ${bg} $out/background.png
-    cp -f ${theme} $out/theme.txt
+    cp -rf ${override}/* $out/
 
     runHook postInstall
   '';
