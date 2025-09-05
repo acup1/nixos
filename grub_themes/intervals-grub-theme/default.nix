@@ -1,8 +1,9 @@
 { pkgs ? import <nixpkgs> { }, ... }:
 let
-  bg = ./background.jpg;
+  bg = ./background.png;
+  theme = ./theme.txt;
 in
-pkgs.stdenv.mkDerivation {
+pkgs.stdenvNoCC.mkDerivation {
   name = "intervals-grub-theme";
   src = pkgs.fetchurl {
     url = "https://github.com/yeyushengfan258/Intervals-grub-theme/raw/21119056cf62d67ea5ae0ba6d7e4b06696ab27b9/releases/Intervals-window-grub-themes.tar.xz";
@@ -13,21 +14,13 @@ pkgs.stdenv.mkDerivation {
     tar -xJf $src
   '';
   installPhase = ''
+    runHook preInstall
+
     mkdir -p $out
     cp -r Intervals-window-grub-themes/1080p/Intervals-window/* $out/
-    cp -rf ${bg} $out/background.jpg
+    cp -f ${bg} $out/background.png
+    cp -f ${theme} $out/theme.txt
+
+    runHook postInstall
   '';
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

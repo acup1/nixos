@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 let
-  theme = "${pkgs.callPackage ../grub_themes/intervals-grub-theme { }}/.";
+  theme = pkgs.callPackage ../grub_themes/intervals-grub-theme { };
 in
 {
   boot.loader.grub = {
