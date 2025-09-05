@@ -1,9 +1,6 @@
 { pkgs ? import <nixpkgs> { }, ... }:
 let
-  bg = pkgs.fetchurl {
-    url = "./background.jpg";
-    hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
-  };
+  bg = ./background.jpg;
 in
 pkgs.stdenv.mkDerivation {
   name = "intervals-grub-theme";
@@ -14,11 +11,23 @@ pkgs.stdenv.mkDerivation {
   nativeBuildInputs = [ pkgs.xz ];
   unpackPhase = ''
     tar -xJf $src
-    cp -rf ${bg} Intervals-window-grub-themes
   '';
   installPhase = ''
     mkdir -p $out
     cp -r Intervals-window-grub-themes/1080p/Intervals-window/* $out/
+    cp -rf ${bg} $out/background.jpg
   '';
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
