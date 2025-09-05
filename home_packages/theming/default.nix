@@ -1,8 +1,7 @@
-{
-  pkgs,
-  config,
-  inputs,
-  ...
+{ pkgs
+, config
+, inputs
+, ...
 }: {
   gtk = {
     enable = true;
@@ -15,8 +14,8 @@
       name = "Orchis-Grey-Dark-Compact";
     };
     iconTheme = {
-      package = pkgs.kora-icon-theme;
-      name = "Kora";
+      package = pkgs.tela-icon-theme;
+      name = "Tela-black";
     };
   };
 
