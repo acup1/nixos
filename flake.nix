@@ -26,7 +26,7 @@
       system = "x86_64-linux";
     in
     {
-      nixosConfigurations.desktop = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
         modules =
           [
             ./home.nix

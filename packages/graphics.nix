@@ -1,6 +1,6 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   environment.systemPackages = with pkgs; [
-    blender
+    (blender.override { cudaSupport = true; })
     freecad-wayland
     linuxPackages.nvidia_x11
     libglvnd
