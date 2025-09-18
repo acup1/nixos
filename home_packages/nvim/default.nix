@@ -4,7 +4,7 @@
 , ...
 }:
 let
-  repo = builtins.fetchGit { url = "https://github.com/AstroNvim/AstroNvim"; };
+  repo = builtins.fetchGit { url = "https://github.com/acup1/nvimcfg"; };
 in
 {
   home.packages = with pkgs; [
