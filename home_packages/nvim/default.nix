@@ -11,5 +11,5 @@ in
 
   ];
   #xdg.configFile."nvim".source = "${repo.outPath}/";
-  xdg.configFile."nvim".source = ./nvimcfg;
+  xdg.configFile."nvim".source = ./.config/nvimcfg;
 }
