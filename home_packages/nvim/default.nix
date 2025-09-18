@@ -10,5 +10,6 @@ in
   home.packages = with pkgs; [
 
   ];
-  xdg.configFile."nvim".source = "${repo.outPath}/";
+  #xdg.configFile."nvim".source = "${repo.outPath}/";
+  xdg.configFile."nvim".source = ./nvimcfg;
 }
