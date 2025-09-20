@@ -1,4 +1,4 @@
--- if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
+if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
 
 ---@type LazySpec
 return {
@@ -17,17 +17,17 @@ return {
       -- this file can contain specific instructions for your project
       instructions_file = "avante.md",
       -- for example
-      provider = "github",
+      provider = "ollama",
       providers = {
-        github = {
-          __inherited_from = "openai",
-          endpoint = "https://models.github.ai/inference",
-          model = "deepseek/DeepSeek-R1-0528",
-          timeout = 30000, -- Timeout in milliseconds
-          extra_request_body = {
-            temperature = 0.75,
-            max_tokens = 2048,
-          },
+        -- lms = {
+        --   __inherited_from = "openai",
+        --   ["local"] = true,
+        --   endpoint = "127.0.0.1:1234",
+        --   model = "qwen/qwen2.5-coder-14b",
+        -- },
+        ollama = {
+          endpoint = "http://127.0.0.1:11434", -- Note that there is no /v1 at the end.
+          model = "qwen2.5-coder:0.5b",
         },
       },
     },
