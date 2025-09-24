@@ -8,7 +8,7 @@ let
 in
 {
   home.packages = with pkgs; [
-
+    neovide
   ];
   #xdg.configFile."nvim".source = "${repo.outPath}/";
   xdg.configFile."nvim".source = ./.config/nvimcfg;
