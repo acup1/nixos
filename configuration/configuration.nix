@@ -1,14 +1,8 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{ config
-, pkgs
-, inputs
-, ...
-}: {
-  imports = [
-    /etc/nixos/hardware-configuration.nix
-  ];
+{ config, pkgs, inputs, ... }: {
+  imports = [ /etc/nixos/hardware-configuration.nix ];
 
   # Bootloader.
   #boot.loader.systemd-boot.enable = true;
@@ -74,11 +68,16 @@
     openFirewall = true;
   };
   services.printing.enable = true;
-  services.printing.drivers = [
-    pkgs.gutenprint
-    pkgs.hplip
-  ];
+  services.printing.drivers = [ pkgs.gutenprint pkgs.hplip ];
+  services.upower = {
+    enable = true;
+    percentageLow = 20;
+    percentageCritical = 5;
+    percentageAction = 3;
+    criticalPowerAction = "PowerOff";
+  };
   services.power-profiles-daemon.enable = true;
+
   programs.system-config-printer.enable = true;
 
   programs.zsh.enable = true;
@@ -139,9 +138,7 @@
 
   hardware.graphics = {
     enable = true;
-    extraPackages = with pkgs; [
-      libgbm
-    ];
+    extraPackages = with pkgs; [ libgbm ];
   };
 
   #environment.systemPackages = with unstable-pkgs; [

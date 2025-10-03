@@ -30,5 +30,7 @@ bindkey -s "^D" 'df -h^M'
 bindkey -s "^T" 'du .^M'
 
 export NIXPKGS_ALLOW_UNFREE=1
+export EDITOR=nvim
+export SHELL=zsh
 
 eval "$(starship init zsh)"
