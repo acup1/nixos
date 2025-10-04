@@ -1,9 +1,10 @@
 { pkgs, inputs, system, ... }: {
   environment.systemPackages = with pkgs; [
+    hyprland
     hyprlock
     hyprpaper
     cliphist
-    hyprland
+    gpu-screen-recorder
 
     wget
     unzip

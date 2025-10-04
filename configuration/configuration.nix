@@ -43,9 +43,11 @@
   #services.desktopManager.sddm.enable = true;
 
   # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us,ru";
-    variant = "";
+  services.xserver = {
+    xkb = {
+      layout = "us,ru";
+      variant = "";
+    };
   };
 
   # Enable CUPS to print documents.
