@@ -1,8 +1,8 @@
 { pkgs, config, inputs, ... }: {
   programs.zsh = {
     enable = true;
-    enableAutosuggestions = true;
-    enableSyntaxHighlighting = true;
+    autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
     enableCompletion =
       false; # Disable default completion to avoid conflicts with zsh-autocomplete
 
