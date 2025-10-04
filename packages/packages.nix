@@ -1,11 +1,10 @@
-{
-  pkgs,
-  inputs,
-  system,
-  ...
-}: {
+{ pkgs, inputs, system, ... }: {
   environment.systemPackages = with pkgs; [
     hyprlock
+    hyprpaper
+    cliphist
+    hyprland
+
     wget
     unzip
     #wl-clipboard-rs
@@ -17,7 +16,6 @@
     zsh
     alacritty
     git
-    hyprpaper
     tor-browser
     networkmanagerapplet
     neofetch
@@ -45,7 +43,5 @@
     #inputs.caelestia-shell.packages.${system}.default
     comma
   ];
-  nixpkgs.config.permittedInsecurePackages = [
-    "qtwebengine-5.15.19"
-  ];
+  nixpkgs.config.permittedInsecurePackages = [ "qtwebengine-5.15.19" ];
 }

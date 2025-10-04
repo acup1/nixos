@@ -1,82 +1,43 @@
-{ lib
-, stdenv
-, dpkg
-, autoPatchelfHook
-, alsa-lib
-, at-spi2-core
-, libtool
-, libxkbcommon
-, nspr
-, mesa
-, libtiff
-, udev
-, gtk3
-, libsForQt5
-, xorg
-, cups
-, pango
-, libjpeg
-, gtk2
-, gdk-pixbuf
-, libpulseaudio
-, libbsd
-, libusb1
-, libmysqlclient
-, llvmPackages
-, dbus
-, gcc-unwrapped
-, freetype
-, curl
-, makeWrapper
-, runCommandLocal
-, cacert
-, coreutils
-, bzip2
-,
-}:
+{ lib, stdenv, dpkg, autoPatchelfHook, alsa-lib, at-spi2-core, libtool
+, libxkbcommon, nspr, mesa, libtiff, udev, gtk3, libsForQt5, xorg, cups, pango
+, libjpeg, gtk2, gdk-pixbuf, libpulseaudio, libbsd, libusb1, libmysqlclient
+, llvmPackages, dbus, gcc-unwrapped, freetype, curl, makeWrapper
+, runCommandLocal, cacert, coreutils, bzip2, }:
 let
   pkgVersion = "12.1.2.22571";
-  url = "https://wps-linux-personal.wpscdn.cn/wps/download/ep/Linux2023/22571/wps-office_${pkgVersion}.AK.preread.sw_480057_amd64.deb";
+  url =
+    "https://wps-linux-personal.wpscdn.cn/wps/download/ep/Linux2023/22571/wps-office_${pkgVersion}.AK.preread.sw_480057_amd64.deb";
   hash = "sha256-oppJqiUEe/0xEWxgKVMPMFngjQ0e5xaac6HuFVIBh8I=";
-  uri = builtins.replaceStrings [ "https://wps-linux-personal.wpscdn.cn" ] [ "" ] url;
+  uri =
+    builtins.replaceStrings [ "https://wps-linux-personal.wpscdn.cn" ] [ "" ]
+    url;
   securityKey = "7f8faaaa468174dc1c9cd62e5f218a5b";
-in
-stdenv.mkDerivation rec {
+in stdenv.mkDerivation rec {
   pname = "wps";
   version = pkgVersion;
 
-  src =
-    runCommandLocal "wps-office_${version}.AK.preread.sw_480057_amd64.deb"
-      {
-        outputHashMode = "recursive";
-        outputHashAlgo = "sha256";
-        outputHash = hash;
+  src = runCommandLocal "wps-office_${version}.AK.preread.sw_480057_amd64.deb" {
+    outputHashMode = "recursive";
+    outputHashAlgo = "sha256";
+    outputHash = hash;
 
-        nativeBuildInputs = [
-          curl
-          coreutils
-        ];
+    nativeBuildInputs = [ curl coreutils ];
 
-        impureEnvVars = lib.fetchers.proxyImpureEnvVars;
-        SSL_CERT_FILE = "${cacert}/etc/ssl/certs/ca-bundle.crt";
-      }
-      ''
-        timestamp10=$(date '+%s')
-        md5hash=($(echo -n "${securityKey}${uri}$timestamp10" | md5sum))
-        curl \
-        --retry 3 --retry-delay 3 \
-        "${url}?t=$timestamp10&k=$md5hash" \
-        > $out
-      '';
+    impureEnvVars = lib.fetchers.proxyImpureEnvVars;
+    SSL_CERT_FILE = "${cacert}/etc/ssl/certs/ca-bundle.crt";
+  } ''
+    timestamp10=$(date '+%s')
+    md5hash=($(echo -n "${securityKey}${uri}$timestamp10" | md5sum))
+    curl \
+    --retry 3 --retry-delay 3 \
+    "${url}?t=$timestamp10&k=$md5hash" \
+    > $out
+  '';
 
   unpackCmd = "dpkg -x $src .";
   sourceRoot = ".";
 
-  nativeBuildInputs = [
-    dpkg
-    autoPatchelfHook
-    makeWrapper
-  ];
+  nativeBuildInputs = [ dpkg autoPatchelfHook makeWrapper ];
 
   buildInputs = [
     alsa-lib
@@ -139,8 +100,12 @@ stdenv.mkDerivation rec {
     rm -f $out/opt/kingsoft/wps-office/office6/libbz2.so
     rm -f $out/opt/kingsoft/wps-office/office6/libbz2.so.1.0.4
     # Create correct symlink to bzip2 library
-    ln -sf ${lib.getLib bzip2}/lib/libbz2.so.1 $out/opt/kingsoft/wps-office/office6/libbz2.so
-    ln -sf ${lib.getLib bzip2}/lib/libbz2.so.1 $out/opt/kingsoft/wps-office/office6/libbz2.so.1.0.4
+    ln -sf ${
+      lib.getLib bzip2
+    }/lib/libbz2.so.1 $out/opt/kingsoft/wps-office/office6/libbz2.so
+    ln -sf ${
+      lib.getLib bzip2
+    }/lib/libbz2.so.1 $out/opt/kingsoft/wps-office/office6/libbz2.so.1.0.4
     for i in wps wpp et wpspdf; do
       substituteInPlace $out/bin/$i \
         --replace-fail /opt/kingsoft/wps-office $prefix
@@ -153,7 +118,9 @@ stdenv.mkDerivation rec {
     for i in wps wpp et wpspdf wpsoffice; do
       wrapProgram $out/opt/kingsoft/wps-office/office6/$i \
         --set LD_PRELOAD "${freetype}/lib/libfreetype.so" \
-        --set LD_LIBRARY_PATH "${lib.makeLibraryPath [ gcc-unwrapped.lib (lib.getLib bzip2) ]}"
+        --set LD_LIBRARY_PATH "${
+          lib.makeLibraryPath [ gcc-unwrapped.lib (lib.getLib bzip2) ]
+        }"
     done
     runHook postInstall
   '';
@@ -176,11 +143,6 @@ stdenv.mkDerivation rec {
     sourceProvenance = with sourceTypes; [ binaryNativeCode ];
     hydraPlatforms = [ ];
     license = licenses.unfreeRedistributable;
-    maintainers = with maintainers; [
-      mlatus
-      th0rgal
-      rewine
-      pokon548
-    ];
+    maintainers = with maintainers; [ mlatus th0rgal rewine pokon548 ];
   };
 }

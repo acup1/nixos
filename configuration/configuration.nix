@@ -40,8 +40,6 @@
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
 
-  # Hyprland
-  programs.hyprland.enable = true;
   #services.desktopManager.sddm.enable = true;
 
   # Configure keymap in X11
