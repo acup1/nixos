@@ -1,7 +1,7 @@
 { pkgs, ... }: {
   environment.systemPackages = with pkgs; [
     (callPackage ./asciiss { })
-    (callPackage ./wps { })
+    # (callPackage ./wps { })
     kitty
   ];
 }

@@ -2,7 +2,7 @@
   environment.systemPackages = with pkgs; [
     #docs
     libreoffice-qt6-fresh
-    #wpsoffice-cn
+    # wpsoffice-cn
 
     #latex
     texliveFull

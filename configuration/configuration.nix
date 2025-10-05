@@ -34,20 +34,18 @@
     LC_TIME = "ru_RU.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the GNOME Desktop Environment.
   services.displayManager.gdm.enable = true;
 
-  #services.desktopManager.sddm.enable = true;
-
-  # Configure keymap in X11
   services.xserver = {
+    enable = true;
     xkb = {
       layout = "us,ru";
       variant = "";
     };
+  };
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
   };
 
   # Enable CUPS to print documents.

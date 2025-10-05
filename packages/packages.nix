@@ -38,6 +38,7 @@
     github-desktop
 
     vlc
+    mpv
     nautilus
     pipewire
     scdoc
