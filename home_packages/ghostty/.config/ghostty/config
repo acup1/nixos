@@ -1,3 +1,4 @@
+custom-shader=cursor_blaze_blue.glsl
 custom-shader=cursor_smear.glsl
 theme=Pro
 window-theme=auto
