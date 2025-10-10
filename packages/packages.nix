@@ -4,6 +4,7 @@
     hyprlock
     hyprpaper
     cliphist
+    fuzzel
     gpu-screen-recorder
 
     wget
