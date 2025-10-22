@@ -28,6 +28,7 @@
             showBattery = true;
             showKbLayout = true;
           };
+          toast.enable = false;
         };
         cli = {
           enable = true; # Also add caelestia-cli to path
