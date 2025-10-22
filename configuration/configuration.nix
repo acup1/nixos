@@ -113,6 +113,8 @@
   programs.nix-ld.enable = true;
   #vvirtualisation
   virtualisation.virtualbox.host.enable = true;
+  virtualisation.docker.enable = true;
+
   users.extraGroups.vboxusers.members = [ "acup" ];
   boot.kernelParams = [ "kvm.enable_virt_at_load=0" ];
   boot.kernelModules = [ "cdc_acm" ];
