@@ -1,7 +1,10 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{ config, pkgs, inputs, ... }: {
+{ config, pkgs, inputs, ... }:
+let ports = [ 8080 25565 10022 22 ];
+in
+{
   imports = [ /etc/nixos/hardware-configuration.nix ];
 
   # Bootloader.
@@ -34,8 +37,16 @@
     LC_TIME = "ru_RU.UTF-8";
   };
 
-  services.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.displayManager.gdm = {
+    enable = true;
+    wayland = true;
+    settings = {
+      greeter = {
+        IncludeAll = true; # Включает все сессии (Hyprland + UWSM)
+        DisableUserList = false; # Показывать пользователей
+      };
+    };
+  };
 
   services.xserver = {
     enable = true;
@@ -47,6 +58,7 @@
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
+    withUWSM = false;
   };
 
   # Enable CUPS to print documents.
@@ -159,8 +171,10 @@
   # services.openssh.enable = true;
 
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
+
+  networking.firewall.allowedTCPPorts = ports;
+  networking.firewall.allowedUDPPorts = ports;
+
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 

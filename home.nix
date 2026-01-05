@@ -16,25 +16,10 @@
       home.packages = with pkgs; [ home-manager ];
       programs.home-manager.enable = true;
 
-      programs.caelestia = {
-        enable = true;
-        systemd = {
-          enable = false; # if you prefer starting from your compositor
-          target = "graphical-session.target";
-          environment = [ ];
-        };
-        settings = {
-          bar.status = {
-            showBattery = true;
-            showKbLayout = true;
-          };
-          toast.enable = false;
-        };
-        cli = {
-          enable = true; # Also add caelestia-cli to path
-          settings = { theme.enableGtk = true; };
-        };
-      };
+      # services.wvkbd = {
+      #   enable = true;
+      #   package = pkgs.wvkbd;
+      # };
 
     };
   };
@@ -42,7 +27,8 @@
   users.users.${username} = {
     isNormalUser = true;
     description = "${username}";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups =
+      [ "networkmanager" "wheel" "docker" "plugdev" "dialout" "lp" "lpadmin" ];
     shell = pkgs.zsh;
   };
   nix.settings.allowed-users = [ "${username}" ];

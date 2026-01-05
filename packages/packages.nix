@@ -1,8 +1,8 @@
 { pkgs, inputs, system, ... }: {
   environment.systemPackages = with pkgs; [
     hyprland
-    hyprlock
-    hyprpaper
+    # hyprlock
+    # hyprpaper
     cliphist
     fuzzel
     gpu-screen-recorder
@@ -20,9 +20,9 @@
     git
     tor-browser
     networkmanagerapplet
-    neofetch
-    grim
-    slurp
+
+    # grim
+    # slurp
     grimblast
     cmatrix
     pipes-rs
