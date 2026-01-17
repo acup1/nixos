@@ -6,8 +6,10 @@
     useGlobalPkgs = true;
     extraSpecialArgs = { inherit inputs username host system; };
     users.${username} = {
-      imports = [ inputs.caelestia-shell.homeManagerModules.default ]
-        ++ inputs.nixpkgs.lib.fileset.toList
+      imports = [
+        inputs.caelestia-shell.homeManagerModules.default
+        inputs.dms.homeModules.dank-material-shell
+      ] ++ inputs.nixpkgs.lib.fileset.toList
         (inputs.nixpkgs.lib.fileset.fileFilter
           (file: file.name == "default.nix") ./home_packages);
       home.username = "${username}";
@@ -15,6 +17,7 @@
       home.stateVersion = "25.05";
       home.packages = with pkgs; [ home-manager ];
       programs.home-manager.enable = true;
+      programs.dank-material-shell.enable = true;
 
       # services.wvkbd = {
       #   enable = true;

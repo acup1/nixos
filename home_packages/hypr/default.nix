@@ -11,6 +11,8 @@ in {
 
     extraConfig = ''
       ${builtins.readFile ./.config/hypr/hyprland.conf}
+      ${builtins.readFile ./.config/hypr/autostart.conf}
+      ${builtins.readFile ./.config/hypr/inputnbindings.conf}
     '';
     systemd = {
       enable = false;
