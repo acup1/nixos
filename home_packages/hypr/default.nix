@@ -10,6 +10,7 @@ in {
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
 
     extraConfig = ''
+      source = dms/binds.conf
       ${builtins.readFile ./.config/hypr/hyprland.conf}
       ${builtins.readFile ./.config/hypr/autostart.conf}
       ${builtins.readFile ./.config/hypr/inputnbindings.conf}
