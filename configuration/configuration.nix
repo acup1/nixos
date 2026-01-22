@@ -3,8 +3,7 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 { config, pkgs, inputs, ... }:
 let ports = [ 8080 25565 10022 22 ];
-in
-{
+in {
   imports = [ /etc/nixos/hardware-configuration.nix ];
 
   # Bootloader.
@@ -40,6 +39,7 @@ in
   services.displayManager.gdm = {
     enable = true;
     wayland = true;
+    autoSuspend = false;
     settings = {
       greeter = {
         IncludeAll = true; # Включает все сессии (Hyprland + UWSM)

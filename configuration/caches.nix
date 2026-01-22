@@ -16,7 +16,7 @@
 
   nix.settings.substituters = [
     "https://cache.nixos.org"
-    "https://192.168.0.211:5000"
+    "http://192.168.0.211:5000"
 
     "https://nix-community.cachix.org"
     "https://cuda-maintainers.cachix.org"
@@ -34,7 +34,7 @@
   ];
 
   nix.settings.trusted-substituters = [
-    "https://192.168.0.211:5000"
+    "http://192.168.0.211:5000"
     "https://nix-community.cachix.org"
     "https://cuda-maintainers.cachix.org"
     "https://hyprland.cachix.org"
