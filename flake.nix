@@ -5,6 +5,11 @@
     #(import ./modules.nix)
     {
       nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+      # nix-serve-ng = {
+      #   url = "github:aristanetworks/nix-serve-ng";
+      #   inputs.nixpkgs.follows = "nixpkgs";
+      # };
+
       #nvf.url = "github:acup1/nvf";
       home-manager = {
         url = "github:nix-community/home-manager";
