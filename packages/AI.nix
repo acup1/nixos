@@ -2,6 +2,8 @@
   environment.systemPackages = with pkgs;
     [
       #lmstudio
-      #ollama-cuda
+      # ollama
     ];
+  # services.ollama.enable = true;
+  # services.ollama.serve = true;
 }

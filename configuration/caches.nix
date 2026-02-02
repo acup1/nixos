@@ -16,7 +16,7 @@
 
   nix.settings.substituters = [
     "https://cache.nixos.org"
-    "http://192.168.0.211:5000"
+    # "http://192.168.0.211:5000"
 
     "https://nix-community.cachix.org"
     "https://cuda-maintainers.cachix.org"

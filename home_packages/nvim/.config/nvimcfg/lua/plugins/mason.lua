@@ -11,17 +11,34 @@ return {
     opts = {
       -- Make sure to use the names found in `:Mason`
       ensure_installed = {
-        -- install language servers
-        "lua-language-server",
+        -- LSP серверы
+        "clangd", -- C/C++
+        "lua-language-server", -- Lua
+        "python-lsp-server", -- Python
+        "omnisharp", -- C#
+        "bash-language-server", -- Bash
+        "html-lsp", -- HTML
+        "rnix-lsp", -- Nix
+        "hyprls", -- Hyprland
 
-        -- install formatters
-        "stylua",
+        -- Форматтеры
+        "clang-format", -- C/C++
+        "stylua", -- Lua
+        "beautysh", -- Bash
+        "shfmt", -- Shell
+        "nixfmt", -- Nix
+        "nixpkgs-fmt", -- Nix
+        "biome", -- JavaScript/TypeScript
+        "ruff", -- Python
 
-        -- install debuggers
-        "debugpy",
+        -- Линтеры
+        "selene", -- Lua
+        "htmlhint", -- HTML
 
-        -- install any other package
-        "tree-sitter-cli",
+        -- Другие инструменты
+        "debugpy", -- Python debugger
+        "tree-sitter-cli", -- Tree-sitter CLI
+        "mbake", -- (добавлен по вашему списку)
       },
     },
   },
