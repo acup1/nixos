@@ -2,7 +2,8 @@
   environment.systemPackages = with pkgs; [
     teams-for-linux
     telegram-desktop
-    # discord
+    discord
+    rocketchat-desktop
     #discord-canary
   ];
 }

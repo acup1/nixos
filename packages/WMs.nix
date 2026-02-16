@@ -78,9 +78,26 @@
 
   programs = { niri.enable = true; };
 
-  services = {
-    desktopManager.gnome.enable = true;
-    displayManager.gdm.enable = true;
+  xdg.portal = {
+    enable = true;
+    config = {
+      common = {
+        # default = "wlr";
+      };
+    };
+    wlr.enable = false;
+    wlr.settings = {
+      screencast = {
+        output_name = "eDP-1";
+        chooser_type = "simple";
+        chooser_cmd = "${pkgs.slurp}/bin/slurp -f %o -or";
+      };
+    };
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gnome
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-hyprland
+    ];
   };
   #
   # xdg.portal = {
