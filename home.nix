@@ -6,10 +6,8 @@
     useGlobalPkgs = true;
     extraSpecialArgs = { inherit inputs username host system; };
     users.${username} = {
-      imports = [
-        inputs.caelestia-shell.homeManagerModules.default
-        inputs.dms.homeModules.dank-material-shell
-      ] ++ inputs.nixpkgs.lib.fileset.toList
+      imports = [ inputs.dms.homeModules.dank-material-shell ]
+        ++ inputs.nixpkgs.lib.fileset.toList
         (inputs.nixpkgs.lib.fileset.fileFilter
           (file: file.name == "default.nix") ./home_packages);
       home.username = "${username}";
@@ -31,8 +29,16 @@
   users.users.${username} = {
     isNormalUser = true;
     description = "${username}";
-    extraGroups =
-      [ "networkmanager" "wheel" "docker" "plugdev" "dialout" "lp" "lpadmin" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "docker"
+      "plugdev"
+      "dialout"
+      "lp"
+      "lpadmin"
+      "libvirtd"
+    ];
     shell = pkgs.zsh;
   };
   nix.settings.allowed-users = [ "${username}" ];

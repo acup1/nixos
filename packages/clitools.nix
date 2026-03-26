@@ -3,7 +3,8 @@
     linuxKernel.packages.linux_zen.cpupower
     bat
     neovim
-    neofetch
     fastfetch
+
+    sshfs
   ];
 }

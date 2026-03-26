@@ -1,9 +1,10 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{ config, pkgs, inputs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 let ports = [ 8080 25565 10022 22 ];
-in {
+in
+{
   imports = [ /etc/nixos/hardware-configuration.nix ];
 
   # Bootloader.

@@ -15,10 +15,6 @@
         url = "github:nix-community/home-manager";
         inputs.nixpkgs.follows = "nixpkgs";
       };
-      caelestia-shell = {
-        url = "github:caelestia-dots/shell";
-        inputs.nixpkgs.follows = "nixpkgs";
-      };
 
       hyprland = {
         # type = "github";
@@ -51,6 +47,7 @@
         url = "github:winapps-org/winapps";
         inputs.nixpkgs.follows = "nixpkgs";
       };
+      niri.url = "github:niri-wm/niri/wip/branch";
 
     };
 
@@ -64,7 +61,9 @@
         modules = [ ./home.nix ./programs/default.nix ]
           ++ (nixpkgs.lib.filesystem.listFilesRecursive ./configuration)
           ++ (inputs.nixpkgs.lib.filesystem.listFilesRecursive ./packages)
-          ++ (nixpkgs.lib.filesystem.listFilesRecursive ./modules);
+          ++ (nixpkgs.lib.filesystem.listFilesRecursive ./modules)
+          # ++ [ inputs.niri.nixosModules.niri ]
+        ;
         specialArgs = { inherit self inputs system username; };
       };
       # homeConfigurations.${username} =

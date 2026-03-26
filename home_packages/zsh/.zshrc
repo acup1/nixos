@@ -17,6 +17,8 @@ alias hde="hyprctl dispatch exec"
 alias nv="nvim"
 alias du="du -sh"
 alias ns="nix-shell"
+alias nd="nix develop"
+alias nixrebuild="sudo nixos-rebuild switch --impure --flake /home/acup/flakes/nixos/"
 
 #binds
 bindkey -s "^L" 'ls -la^M'
