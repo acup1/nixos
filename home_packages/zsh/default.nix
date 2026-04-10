@@ -18,8 +18,9 @@
 
     initContent = ''
       ${builtins.readFile ./.zshrc}
+      ${pkgs.pokemon-colorscripts}/bin/pokemon-colorscripts -r -b
     '';
   };
 
-  home.packages = with pkgs; [ starship ];
+  home.packages = with pkgs; [ starship pokemon-colorscripts ];
 }

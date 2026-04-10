@@ -58,7 +58,7 @@
     in
     {
       nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-        modules = [ ./home.nix ./programs/default.nix ]
+        modules = [ ./programs/default.nix ]
           ++ (nixpkgs.lib.filesystem.listFilesRecursive ./configuration)
           ++ (inputs.nixpkgs.lib.filesystem.listFilesRecursive ./packages)
           ++ (nixpkgs.lib.filesystem.listFilesRecursive ./modules)
@@ -66,11 +66,14 @@
         ;
         specialArgs = { inherit self inputs system username; };
       };
-      # homeConfigurations.${username} =
-      #   home-manager.lib.homeManagerConfiguration {
-      #     modules = [ ./home.nix ]; # or wherever your config lives
-      #     pkgs = nixpkgs.legacyPackages.${system};
-      #     extraSpecialArgs = { inherit self inputs system username; };
-      #   };
+
+      homeConfigurations.${username} =
+        home-manager.lib.homeManagerConfiguration {
+          # pkgs = nixpkgs.legacyPackages.${system};
+          pkgs = import nixpkgs { system = "x86_64-linux"; };
+          # inputs.home-manager.nixosModules.home-manager
+          modules = [ ./home.nix ];
+          extraSpecialArgs = { inherit self inputs username system; };
+        };
     };
 }

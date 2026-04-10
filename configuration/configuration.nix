@@ -1,10 +1,9 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{ config, lib, pkgs, inputs, ... }:
-let ports = [ 8080 25565 10022 22 ];
-in
-{
+{ config, lib, pkgs, inputs, username, ... }:
+let ports = [ 8080 25565 10022 22 1433 ];
+in {
   imports = [ /etc/nixos/hardware-configuration.nix ];
 
   # Bootloader.
@@ -186,4 +185,22 @@ in
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11"; # Did you read the comment?
+
+  users.users.${username} = {
+    isNormalUser = true;
+    description = username;
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "docker"
+      "plugdev"
+      "dialout"
+      "lp"
+      "lpadmin"
+      "libvirtd"
+    ];
+    shell = pkgs.zsh;
+  };
+
+  nix.settings.allowed-users = [ "${username}" ];
 }

@@ -17,3 +17,4 @@ adjust-cursor-thickness = 2
 cursor-color = #999999
 cursor-opacity = 0.8
 font-family = "CodeNewRoman"
+font-size = 10

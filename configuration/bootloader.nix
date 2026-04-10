@@ -12,4 +12,6 @@ in {
     timeout = 2;
     efi.canTouchEfiVariables = true;
   };
+
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 }

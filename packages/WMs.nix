@@ -7,7 +7,7 @@
   xdg.portal = {
     enable = true;
     config.common.default = [ "gnome" "hyprland" "gtk" ];
-    wlr.enable = false;
+    wlr.enable = true;
     wlr.settings = {
       screencast = {
         output_name = "eDP-1";
