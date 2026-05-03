@@ -47,33 +47,56 @@
         url = "github:winapps-org/winapps";
         inputs.nixpkgs.follows = "nixpkgs";
       };
-      niri.url = "github:niri-wm/niri/wip/branch";
+      niri.url = "github:niri-wm/niri";
 
-    };
-
-  outputs = { self, nixpkgs, home-manager, ... }@inputs:
-    let
-      username = "acup";
-      system = "x86_64-linux";
-    in
-    {
-      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-        modules = [ ./programs/default.nix ]
-          ++ (nixpkgs.lib.filesystem.listFilesRecursive ./configuration)
-          ++ (inputs.nixpkgs.lib.filesystem.listFilesRecursive ./packages)
-          ++ (nixpkgs.lib.filesystem.listFilesRecursive ./modules)
-          # ++ [ inputs.niri.nixosModules.niri ]
-        ;
-        specialArgs = { inherit self inputs system username; };
+      nvf = {
+        url = "github:notashelf/nvf";
+        inputs.nixpkgs.follows = "nixpkgs";
       };
-
-      homeConfigurations.${username} =
-        home-manager.lib.homeManagerConfiguration {
-          # pkgs = nixpkgs.legacyPackages.${system};
-          pkgs = import nixpkgs { system = "x86_64-linux"; };
-          # inputs.home-manager.nixosModules.home-manager
-          modules = [ ./home.nix ];
-          extraSpecialArgs = { inherit self inputs username system; };
-        };
     };
+
+  outputs = {
+    self,
+    nixpkgs,
+    home-manager,
+    ...
+  } @ inputs: let
+    username = "acup";
+    system = "x86_64-linux";
+  in {
+    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+      modules =
+        [
+          ./programs/default.nix
+        ]
+        ++ (nixpkgs.lib.filesystem.listFilesRecursive ./configuration)
+        ++ (inputs.nixpkgs.lib.filesystem.listFilesRecursive ./packages)
+        ++ (nixpkgs.lib.filesystem.listFilesRecursive ./modules)
+        # ++ [ inputs.niri.nixosModules.niri ]
+        ;
+      specialArgs = {
+        inherit
+          self
+          inputs
+          system
+          username
+          ;
+      };
+    };
+
+    homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
+      pkgs = import nixpkgs {system = "x86_64-linux";};
+      modules = [
+        ./home.nix
+      ];
+      extraSpecialArgs = {
+        inherit
+          self
+          inputs
+          username
+          system
+          ;
+      };
+    };
+  };
 }

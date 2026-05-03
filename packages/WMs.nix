@@ -1,12 +1,26 @@
-{ inputs, pkgs, ... }: {
-  environment.systemPackages = with pkgs; [ xwayland-satellite slurp grim ];
+{
+  inputs,
+  pkgs,
+  services,
+  ...
+}:
+{
+  environment.systemPackages = with pkgs; [
+    xwayland-satellite
+    slurp
+    grim
+  ];
 
   programs.niri.enable = true;
   programs.niri.package = inputs.niri.packages.${pkgs.system}.niri;
 
   xdg.portal = {
     enable = true;
-    config.common.default = [ "gnome" "hyprland" "gtk" ];
+    config.common.default = [
+      "gnome"
+      "hyprland"
+      "gtk"
+    ];
     wlr.enable = true;
     wlr.settings = {
       screencast = {
@@ -21,4 +35,5 @@
       pkgs.xdg-desktop-portal-hyprland
     ];
   };
+  # services.gnome.xdg-desktop-portal-gnome.enable = true;
 }

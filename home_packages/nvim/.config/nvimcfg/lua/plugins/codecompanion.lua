@@ -1,5 +1,5 @@
 -- Remove this line to activate the file
--- if true then return {} end
+if true then return {} end
 
 ---@type LazySpec
 return {

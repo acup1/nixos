@@ -1,5 +1,11 @@
-{ pkgs, services, config, inputs, ... }: {
-  # imports = [ inputs.nix-serve-ng.nixosModules.default ];
+{
+  pkgs,
+  services,
+  config,
+  inputs,
+  ...
+}:
+{
   # imports = [ inputs.nix-serve-ng.nixosModules.default ];
   #
   # services.nix-serve.enable = true;

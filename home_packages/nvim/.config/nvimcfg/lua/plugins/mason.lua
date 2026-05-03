@@ -18,8 +18,8 @@ return {
         "omnisharp", -- C#
         "bash-language-server", -- Bash
         "html-lsp", -- HTML
-        "rnix-lsp", -- Nix
         "hyprls", -- Hyprland
+        -- "nil", -- nix
 
         -- Форматтеры
         "clang-format", -- C/C++
@@ -27,9 +27,9 @@ return {
         "beautysh", -- Bash
         "shfmt", -- Shell
         "nixfmt", -- Nix
-        "nixpkgs-fmt", -- Nix
         "biome", -- JavaScript/TypeScript
         "ruff", -- Python
+        -- "alejandra", -- nix
 
         -- Линтеры
         "selene", -- Lua
