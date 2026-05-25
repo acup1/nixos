@@ -1,5 +1,9 @@
-{ pkgs, config, inputs, ... }:
-let
+{
+  pkgs,
+  config,
+  inputs,
+  ...
+}: let
 in {
   home.packages = with pkgs; [
     inputs.iio-hyprland.packages.${pkgs.system}.default
@@ -17,14 +21,13 @@ in {
     '';
     systemd = {
       enable = false;
-      variables = [ "--all" ];
+      variables = ["--all"];
     };
 
     plugins = [
-      inputs.hyprgrass.packages.${pkgs.system}.default
+      # inputs.hyprgrass.packages.${pkgs.system}.default
       # inputs.Hyprspace.packages.${pkgs.system}.Hyprspace
     ];
-
   };
   # xdg.configFile."hypr".source = ./.config/hypr;
 }

@@ -146,6 +146,9 @@ in {
                   download_remote_images = true,
                   only_render_image_at_cursor = false,
                 },
+                typst = {
+                  enabled = false,
+                },
               },
               max_width = 100,
               max_height = 20,
@@ -171,9 +174,34 @@ in {
         })
       '';
 
+      luaConfigRC.sql-format = entryAnywhere ''
+        local conform = require("conform")
+        conform.formatters.sqlfluff = {
+          command = "sqlfluff-tsql",
+          stdin = false,
+        }
+        conform.formatters_by_ft.sql = { "sqlfluff" }
+      '';
+      luaConfigRC.conform-timeout = entryAnywhere ''
+        require("conform").setup({
+          format_on_save = {
+            timeout_ms = 10000,
+            lsp_fallback = false,
+          },
+        })
+      '';
+
       extraPackages = with pkgs; [
         wl-clipboard
         imagemagick
+        sqlfluff
+        (pkgs.writeShellScriptBin "sqlfluff-tsql" ''
+          tmpfile=$(mktemp /tmp/sqlfluff-XXXXXX.sql)
+          cat | sed 's/#\([A-Za-z]\)/__TEMP__\1/g' > "$tmpfile"
+          sqlfluff fix --dialect tsql --disable-progress-bar "$tmpfile" > /dev/null 2>&1
+          cat "$tmpfile" | sed 's/__TEMP__\([A-Za-z]\)/#\1/g'
+          rm -f "$tmpfile"
+        '')
       ];
       binds = {
         whichKey.enable = true;
@@ -249,6 +277,7 @@ in {
           enable = true;
           lsp.enable = true;
           format.enable = true;
+          format.type = "sqlfluff";
           treesitter.enable = true;
         };
         rust = {

@@ -3,8 +3,7 @@
   pkgs,
   services,
   ...
-}:
-{
+}: {
   environment.systemPackages = with pkgs; [
     xwayland-satellite
     slurp
@@ -12,14 +11,14 @@
   ];
 
   programs.niri.enable = true;
-  programs.niri.package = inputs.niri.packages.${pkgs.system}.niri;
+  # programs.niri.package = inputs.niri.packages.${pkgs.system}.niri;
 
   xdg.portal = {
     enable = true;
     config.common.default = [
       "gnome"
-      "hyprland"
-      "gtk"
+      # "hyprland"
+      # "gtk"
     ];
     wlr.enable = true;
     wlr.settings = {
@@ -34,6 +33,10 @@
       pkgs.xdg-desktop-portal-gtk
       pkgs.xdg-desktop-portal-hyprland
     ];
+  };
+  environment.sessionVariables = {
+    XDG_CURRENT_DESKTOP = "niri";
+    NIXOS_OZONE_WL = "1";
   };
   # services.gnome.xdg-desktop-portal-gnome.enable = true;
 }

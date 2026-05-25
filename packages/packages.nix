@@ -1,11 +1,13 @@
-{ pkgs, inputs, system, ... }: {
+{
+  pkgs,
+  inputs,
+  system,
+  ...
+}: {
   environment.systemPackages = with pkgs; [
     hyprland
-    # hyprlock
-    # hyprpaper
     cliphist
     fuzzel
-    gpu-screen-recorder
 
     wget
     unzip
@@ -21,11 +23,7 @@
     tor-browser
     networkmanagerapplet
 
-    # grim
-    # slurp
     grimblast
-    cmatrix
-    pipes-rs
     qbittorrent
     qalculate-gtk
     fxlinuxprint
@@ -35,16 +33,21 @@
     p7zip
     nodejs
     obs-studio
-    wineWowPackages.waylandFull
-    github-desktop
+    wineWow64Packages.waylandFull
 
     vlc
     mpv
     nautilus
     pipewire
     scdoc
-    #inputs.caelestia-shell.packages.${system}.default
     comma
   ];
-  nixpkgs.config.permittedInsecurePackages = [ "qtwebengine-5.15.19" ];
+  nixpkgs.overlays = [
+    (_: prev: {
+      openldap = prev.openldap.overrideAttrs {
+        doCheck = !prev.stdenv.hostPlatform.isi686;
+      };
+    })
+  ];
+  nixpkgs.config.permittedInsecurePackages = ["qtwebengine-5.15.19"];
 }
