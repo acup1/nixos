@@ -18,7 +18,6 @@ alias nv="nvim"
 alias du="du -sh"
 alias ns="nix-shell"
 alias nd="nix develop"
-alias nixrebuild="sudo nixos-rebuild switch --impure --flake /home/acup/flakes/nixos/"
 alias pwrff="poweroff"
 
 #binds
@@ -28,7 +27,7 @@ bindkey -s "^Y" 'yazi^M'
 bindkey -s "^B" 'btop^M'
 bindkey -s "^E" 'nv ^M'
 bindkey -s "^Z" 'fg^M'
-bindkey -s "^N" 'neofetch^M'
+bindkey -s "^N" 'fastfetch^M'
 bindkey -s "^D" 'df -h^M'
 bindkey -s "^T" 'du .^M'
 bindkey -s "^P" 'clear && pokemon-colorscripts -r -b^M'

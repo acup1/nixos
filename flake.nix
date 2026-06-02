@@ -63,6 +63,7 @@
   } @ inputs: let
     username = "acup";
     system = "x86_64-linux";
+    flakeDir = "/home/acup/flakes/nixos";
   in {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       modules =
@@ -80,6 +81,7 @@
           inputs
           system
           username
+          flakeDir
           ;
       };
     };
@@ -95,6 +97,7 @@
           inputs
           username
           system
+          flakeDir
           ;
       };
     };

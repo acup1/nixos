@@ -1,4 +1,11 @@
-{ pkgs, config, inputs, ... }: {
+{
+  pkgs,
+  config,
+  inputs,
+  username,
+  flakeDir,
+  ...
+}: {
   programs.zsh = {
     enable = true;
     autosuggestion.enable = true;
@@ -18,9 +25,12 @@
 
     initContent = ''
       ${builtins.readFile ./.zshrc}
+      alias nixrebuild="sudo nixos-rebuild switch --impure --flake ${flakeDir}"
+      alias nixhomerebuild="home-manager switch --flake ${flakeDir}#${username}"
+      alias nixcleanup="sudo nix-collect-garbage -d"
       ${pkgs.pokemon-colorscripts}/bin/pokemon-colorscripts -r -b
     '';
   };
 
-  home.packages = with pkgs; [ starship pokemon-colorscripts ];
+  home.packages = with pkgs; [starship pokemon-colorscripts];
 }

@@ -8,7 +8,15 @@
     xwayland-satellite
     slurp
     grim
+    iio-niri
+    maliit-keyboard
+    maliit-framework
   ];
+  environment.sessionVariables = {
+    MALIIT_PLUGINS_DIR = "${pkgs.maliit-keyboard}/lib/maliit/plugins";
+    XDG_CURRENT_DESKTOP = "niri";
+    NIXOS_OZONE_WL = "1";
+  };
 
   programs.niri.enable = true;
   # programs.niri.package = inputs.niri.packages.${pkgs.system}.niri;
@@ -16,9 +24,9 @@
   xdg.portal = {
     enable = true;
     config.common.default = [
-      "gnome"
+      # "gnome"
       # "hyprland"
-      # "gtk"
+      "gtk"
     ];
     wlr.enable = true;
     wlr.settings = {
@@ -29,14 +37,10 @@
       };
     };
     extraPortals = [
-      pkgs.xdg-desktop-portal-gnome
+      # pkgs.xdg-desktop-portal-gnome
       pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal-hyprland
+      # pkgs.xdg-desktop-portal-hyprland
     ];
-  };
-  environment.sessionVariables = {
-    XDG_CURRENT_DESKTOP = "niri";
-    NIXOS_OZONE_WL = "1";
   };
   # services.gnome.xdg-desktop-portal-gnome.enable = true;
 }

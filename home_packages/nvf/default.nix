@@ -298,6 +298,24 @@ in {
           treesitter.enable = true;
           format.enable = true;
         };
+        terraform = {
+          enable = true;
+          lsp.enable = true;
+          treesitter.enable = true;
+          format.enable = true;
+        };
+        tex = {
+          enable = true;
+          lsp.enable = true;
+          treesitter.enable = true;
+          format.enable = true;
+        };
+        typescript = {
+          enable = true;
+          lsp.enable = true;
+          treesitter.enable = true;
+          #format.enable = true;
+        };
       };
 
       keymaps = [

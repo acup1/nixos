@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-let
+{pkgs, ...}: let
   # customGo = pkgs.go.overrideAttrs (old: {
   #   preConfigure = (old.preConfigure or "") + ''
   #     export CGO_ENABLED=0
@@ -8,13 +7,13 @@ let
   # customWinboat = pkgs.winboat.override {
   #   buildGoModule = args: pkgs.buildGoModule (args // { go = customGo; });
   # };
-in
-{
+in {
   environment.systemPackages = with pkgs; [
     docker
     docker-compose
     virt-manager
     qemu
+    terraform
     winboat
   ];
 
@@ -44,5 +43,4 @@ in
   # users.users.${username}.extraGroups = [ "libvirtd" ];
   # services.spice-vdagentd.enable = true;
   # programs.virt-manager.enable = true;
-
 }
