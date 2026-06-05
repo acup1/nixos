@@ -192,7 +192,6 @@ in {
       '';
 
       extraPackages = with pkgs; [
-        wl-clipboard
         imagemagick
         sqlfluff
         (pkgs.writeShellScriptBin "sqlfluff-tsql" ''

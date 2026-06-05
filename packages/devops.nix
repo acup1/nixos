@@ -1,13 +1,11 @@
 {
   pkgs,
-  inputs,
-  system,
+  lib,
   ...
 }: {
   environment.systemPackages = with pkgs; [
-    cups
-    p7zip
-    nodejs
-    # obs-studio
+    docker
+    docker-compose
+    terraform
   ];
 }

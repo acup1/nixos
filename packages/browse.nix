@@ -1,1 +1,9 @@
-{ pkgs, ... }: { environment.systemPackages = with pkgs; [ google-chrome ]; }
+{
+  pkgs,
+  inputs,
+  ...
+}: {
+  environment.systemPackages = with pkgs; [
+    inputs.zen-browser.packages.${system}.default
+  ];
+}

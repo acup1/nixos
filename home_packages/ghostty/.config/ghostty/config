@@ -1,20 +1,19 @@
 custom-shader=cursor_blaze_blue.glsl
 custom-shader=cursor_smear.glsl
-theme=Pro
+theme=Aizen Dark
 window-theme=auto
-window-decoration=false
 background-opacity=0.6
 background-blur-radius=1
 confirm-close-surface = false
-#initial-command=zfetch && zsh
 shell-integration = zsh
 title="ghostty"
 keybind = ctrl+shift+e=new_split:right
 keybind = ctrl+shift+d=new_split:down
 keybind = ctrl+shift+w=unbind
 keybind = ctrl+shift+w=close_surface
+keybind = ctrl+shift+t=new_tab
 adjust-cursor-thickness = 2
 cursor-color = #999999
 cursor-opacity = 0.8
 font-family = "CodeNewRoman"
-font-size = 10
+font-size = 13

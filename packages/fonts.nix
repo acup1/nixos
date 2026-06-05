@@ -1,4 +1,8 @@
-{ pkgs, ... }: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   fonts.packages = with pkgs; [
     corefonts
     vista-fonts

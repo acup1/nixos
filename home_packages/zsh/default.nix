@@ -1,7 +1,5 @@
 {
   pkgs,
-  config,
-  inputs,
   username,
   flakeDir,
   ...
@@ -10,27 +8,20 @@
     enable = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
-    enableCompletion =
-      true; # Disable default completion to avoid conflicts with zsh-autocomplete
-
-    # plugins = [{
-    #   name = "zsh-autocomplete";
-    #   src = pkgs.fetchFromGitHub {
-    #     owner = "marlonrichert";
-    #     repo = "zsh-autocomplete";
-    #     rev = "762afacbf227ecd173e899d10a28a478b4c84a3f";
-    #     sha256 = "1357hygrjwj5vd4cjdvxzrx967f1d2dbqm2rskbz5z1q6jri1hm3";
-    #   };
-    # }];
+    enableCompletion = true;
 
     initContent = ''
       ${builtins.readFile ./.zshrc}
-      alias nixrebuild="sudo nixos-rebuild switch --impure --flake ${flakeDir}"
-      alias nixhomerebuild="home-manager switch --flake ${flakeDir}#${username}"
+      alias nixrebuild="sudo darwin-rebuild switch --impure --flake ${flakeDir}"
+      alias nixhomerebuild="home-manager switch --impure --flake ${flakeDir}#${username}"
       alias nixcleanup="sudo nix-collect-garbage -d"
-      ${pkgs.pokemon-colorscripts}/bin/pokemon-colorscripts -r -b
+      alias nixfullrebuild="nixrebuild && nixhomerebuild && nixcleanup"
+      # ${pkgs.pokemon-colorscripts}/bin/pokemon-colorscripts -r -b
     '';
   };
 
-  home.packages = with pkgs; [starship pokemon-colorscripts];
+  home.packages = with pkgs; [
+    starship
+    # pokemon-colorscripts
+  ];
 }

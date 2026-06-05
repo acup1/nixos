@@ -1,59 +1,33 @@
 {
-  description = "cups nixos";
+  description = "cups nix(mac)os";
 
-  inputs =
-    #(import ./modules.nix)
-    {
-      nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-      # nix-serve-ng = {
-      #   url = "github:aristanetworks/nix-serve-ng";
-      #   inputs.nixpkgs.follows = "nixpkgs";
-      # };
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs"; #?ref=nixos-26.05";
 
-      #nvf.url = "github:acup1/nvf";
-      home-manager = {
-        url = "github:nix-community/home-manager";
-        inputs.nixpkgs.follows = "nixpkgs";
-      };
+    nix-darwin = {
+      url = "github:LnL7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-      hyprland = {
-        # type = "github";
-        url = "github:hyprwm/Hyprland";
-        # submodules = true;
-        inputs.nixpkgs.follows = "nixpkgs";
-      };
-      # hyprgrass = {
-      #   url = "github:horriblename/hyprgrass";
-      #   inputs.hyprland.follows = "hyprland";
-      # };
-      # Hyprspace = {
-      #   url = "github:KZDKM/Hyprspace";
-      #   inputs.hyprland.follows = "hyprland";
-      # };
+    home-manager = {
+      url = "github:nix-community/home-manager"; # /release-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-      iio-hyprland.url = "github:JeanSchoeller/iio-hyprland";
+    nvf = {
+      url = "github:notashelf/nvf";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-      nix-matlab = {
-        url = "gitlab:doronbehar/nix-matlab";
-        inputs.nixpkgs.follows = "nixpkgs";
-      };
-
-      dms = {
-        url = "github:AvengeMedia/DankMaterialShell/stable";
-        inputs.nixpkgs.follows = "nixpkgs";
-      };
-
-      winapps = {
-        url = "github:winapps-org/winapps";
-        inputs.nixpkgs.follows = "nixpkgs";
-      };
-      niri.url = "github:niri-wm/niri";
-
-      nvf = {
-        url = "github:notashelf/nvf";
-        inputs.nixpkgs.follows = "nixpkgs";
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs = {
+        # IMPORTANT: To ensure compatibility with the latest Firefox version, use nixpkgs-unstable.
+        nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "home-manager";
       };
     };
+  };
 
   outputs = {
     self,
@@ -61,20 +35,22 @@
     home-manager,
     ...
   } @ inputs: let
-    username = "acup";
-    system = "x86_64-linux";
-    flakeDir = "/home/acup/flakes/nixos";
+    configFile =
+      if builtins.pathExists /nix/config.nix
+      then import /nix/config.nix
+      else throw "`/nix/config.nix` is missing";
+
+    username = configFile.username or (throw "variable `username` in `/nix/config.nix` is missing");
+    system = configFile.system or (throw "variable `system` in `/nix/config.nix` is missing");
+    flakeDir = configFile.flakeDir or (throw "variable `flakeDir` in `/nix/config.nix` is missing");
   in {
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+    darwinConfigurations."${username}-OSX" = inputs.nix-darwin.lib.darwinSystem {
+      inherit system;
       modules =
         [
-          ./programs/default.nix
         ]
-        ++ (nixpkgs.lib.filesystem.listFilesRecursive ./configuration)
-        ++ (inputs.nixpkgs.lib.filesystem.listFilesRecursive ./packages)
-        ++ (nixpkgs.lib.filesystem.listFilesRecursive ./modules)
-        # ++ [ inputs.niri.nixosModules.niri ]
-        ;
+        ++ (nixpkgs.lib.filesystem.listFilesRecursive ./darwin-configuration)
+        ++ (inputs.nixpkgs.lib.filesystem.listFilesRecursive ./packages);
       specialArgs = {
         inherit
           self
@@ -87,7 +63,7 @@
     };
 
     homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
-      pkgs = import nixpkgs {system = "x86_64-linux";};
+      pkgs = import nixpkgs {system = system;};
       modules = [
         ./home.nix
       ];

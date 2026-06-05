@@ -4,7 +4,7 @@
 , ...
 }: {
   home.packages = with pkgs; [
-    ghostty
+    ghostty-bin
   ];
   xdg.configFile."ghostty".source = ./.config/ghostty;
 }

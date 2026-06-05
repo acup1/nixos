@@ -1,15 +1,15 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     gcc
-    libgccjit
+    # libgcc
     cling
     clang
 
-    rustc
-    rustup
-    cargo
-
-    arduino-ide
+    # rustc
+    # rustup
+    # cargo
+    #
+    # arduino-ide
 
     go
     gnumake

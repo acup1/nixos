@@ -1,13 +1,19 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
-    linuxKernel.packages.linux_zen.cpupower
-    bat
-    neovim
-    fastfetch
-
+    wget
+    unzip
+    fzf
+    zsh
+    git
     sshfs
 
+    bat
+    neovim
+
+    fastfetch
     cmatrix
     pipes-rs
+
+    comma
   ];
 }
