@@ -1,0 +1,174 @@
+# =============================================================
+# НАВИГАЦИЯ (Mod+H/J/K/L и стрелки → focus-column/window)
+# =============================================================
+
+# focus-column-left / focus-column-right
+alt - h : yabai -m window --focus west
+alt - l : yabai -m window --focus east
+alt - left  : yabai -m window --focus west
+alt - right : yabai -m window --focus east
+
+# focus-window-down / focus-window-up
+alt - j : yabai -m window --focus south
+alt - k : yabai -m window --focus north
+alt - down : yabai -m window --focus south
+alt - up   : yabai -m window --focus north
+
+# focus-column-first / focus-column-last (Mod+Home / Mod+End)
+alt - home : yabai -m window --focus first
+alt - end  : yabai -m window --focus last
+
+# =============================================================
+# ПЕРЕМЕЩЕНИЕ ОКОН (Mod+Ctrl+H/J/K/L → move-column)
+# =============================================================
+
+alt + ctrl - h : yabai -m window --warp west
+alt + ctrl - j : yabai -m window --warp south
+alt + ctrl - k : yabai -m window --warp north
+alt + ctrl - l : yabai -m window --warp east
+alt + ctrl - left  : yabai -m window --warp west
+alt + ctrl - right : yabai -m window --warp east
+alt + ctrl - down  : yabai -m window --warp south
+alt + ctrl - up    : yabai -m window --warp north
+
+# move-column-to-first / move-column-to-last
+alt + ctrl - home : yabai -m window --swap first
+alt + ctrl - end  : yabai -m window --swap last
+
+# =============================================================
+# МОНИТОРЫ (Mod+Shift+H/J/K/L → focus-monitor)
+# =============================================================
+
+alt + shift - h : yabai -m display --focus west
+alt + shift - j : yabai -m display --focus south
+alt + shift - k : yabai -m display --focus north
+alt + shift - l : yabai -m display --focus east
+alt + shift - left  : yabai -m display --focus west
+alt + shift - right : yabai -m display --focus east
+alt + shift - down  : yabai -m display --focus south
+alt + shift - up    : yabai -m display --focus north
+
+# move-column-to-monitor (Mod+Shift+Ctrl)
+alt + shift + ctrl - h : yabai -m window --display west;  yabai -m display --focus west
+alt + shift + ctrl - j : yabai -m window --display south; yabai -m display --focus south
+alt + shift + ctrl - k : yabai -m window --display north; yabai -m display --focus north
+alt + shift + ctrl - l : yabai -m window --display east;  yabai -m display --focus east
+
+# =============================================================
+# ВОРКСПЕЙСЫ (Mod+1-9 → focus-workspace)
+# =============================================================
+
+alt - 1 : yabai -m space --focus 1
+alt - 2 : yabai -m space --focus 2
+alt - 3 : yabai -m space --focus 3
+alt - 4 : yabai -m space --focus 4
+alt - 5 : yabai -m space --focus 5
+alt - 6 : yabai -m space --focus 6
+alt - 7 : yabai -m space --focus 7
+alt - 8 : yabai -m space --focus 8
+alt - 9 : yabai -m space --focus 9
+
+# focus-workspace-down/up (Mod+U/I, Mod+Page_Down/Up)
+alt - u : yabai -m space --focus next
+alt - i : yabai -m space --focus prev
+alt - page_down : yabai -m space --focus next
+alt - page_up   : yabai -m space --focus prev
+
+# move-column-to-workspace (Mod+Shift+1-9)
+alt + shift - 1 : yabai -m window --space 1
+alt + shift - 2 : yabai -m window --space 2
+alt + shift - 3 : yabai -m window --space 3
+alt + shift - 4 : yabai -m window --space 4
+alt + shift - 5 : yabai -m window --space 5
+alt + shift - 6 : yabai -m window --space 6
+alt + shift - 7 : yabai -m window --space 7
+alt + shift - 8 : yabai -m window --space 8
+alt + shift - 9 : yabai -m window --space 9
+
+# move-column-to-workspace-down/up (Mod+Ctrl+U/I)
+alt + ctrl - u : yabai -m window --space next; yabai -m space --focus next
+alt + ctrl - i : yabai -m window --space prev; yabai -m space --focus prev
+
+# =============================================================
+# РАЗМЕР ОКОН (Mod+Minus/Equal → set-column-width ±10%)
+# =============================================================
+
+# set-column-width -10% / +10%
+alt - 0x1B : yabai -m window --resize right:-60:0    # Mod+Minus
+alt - 0x18 : yabai -m window --resize right:60:0     # Mod+Equal
+
+# set-window-height -10% / +10%
+alt + shift - 0x1B : yabai -m window --resize bottom:0:-60  # Mod+Shift+Minus
+alt + shift - 0x18 : yabai -m window --resize bottom:0:60   # Mod+Shift+Equal
+
+# reset-window-height (Mod+Ctrl+R)
+alt + ctrl - r : yabai -m space --balance
+
+# switch-preset-column-width (Mod+R) — циклически 1/3 → 1/2 → 2/3
+alt - r : yabai -m window --ratio abs:0.5
+
+# =============================================================
+# FULLSCREEN / MAXIMIZE (Mod+F / Mod+Shift+F)
+# =============================================================
+
+# maximize-column (Mod+F)
+alt - f : yabai -m window --toggle zoom-parent
+
+# fullscreen-window (Mod+Shift+F)
+alt + shift - f : yabai -m window --toggle zoom-fullscreen
+
+# =============================================================
+# FLOATING (Mod+V → toggle-window-floating)
+# =============================================================
+
+alt - v : yabai -m window --toggle float
+# Mod+Shift+V — переключить фокус между floating и tiling
+alt + shift - v : yabai -m window --focus \
+  "$(yabai -m query --windows | \
+    jq -r 'map(select(if .["is-floating"] then true else false end)) | .[0].id')"
+
+# =============================================================
+# ЗАКРЫТЬ ОКНО (Mod+C)
+# =============================================================
+
+alt - c : yabai -m window --close
+
+# =============================================================
+# ПРИЛОЖЕНИЯ (Mod+Q → ghostty)
+# =============================================================
+
+alt - q : open -a Ghostty
+
+# =============================================================
+# МЕДИА
+# =============================================================
+
+alt + shift - p : playerctl play-pause
+alt + shift - i : playerctl previous
+alt + shift - o : playerctl next
+alt + shift - k : wpctl set-volume @DEFAULT_SINK@ 5%-
+alt + shift - l : wpctl set-volume @DEFAULT_SINK@ 5%+
+
+# =============================================================
+# СКРИНШОТЫ
+# =============================================================
+
+# Print → screenshot full
+0x69 : dms ipc call niri screenshotScreen
+# Shift+Print → interactive
+shift - 0x69 : dms ipc call niri screenshot
+# Alt+Print → window
+alt - 0x69 : dms ipc call niri screenshotWindow
+
+# =============================================================
+# СИСТЕМА
+# =============================================================
+
+# Mod+X → App Launcher
+alt - x : dms ipc call spotlight toggle
+
+# Mod+Shift+E → Power Menu
+alt + shift - e : dms ipc call powermenu toggle
+
+# Переключение раскладки (grp:win_space_toggle → Super+Space)
+# В macOS это делается через System Settings → Keyboard Shortcuts

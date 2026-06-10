@@ -315,6 +315,12 @@ in {
           treesitter.enable = true;
           #format.enable = true;
         };
+        json = {
+          enable = true;
+          # lsp.enable = true;
+          treesitter.enable = true;
+          format.enable = true;
+        };
       };
 
       keymaps = [

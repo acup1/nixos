@@ -36,7 +36,7 @@ export NIXPKGS_ALLOW_UNFREE=1
 export EDITOR=nvim
 export SHELL=zsh
 
-source $HOME/.secrets.sh
+# source $HOME/.secrets.sh
 export PATH="/opt/homebrew/bin:$PATH"
 
 eval "$(starship init zsh)"

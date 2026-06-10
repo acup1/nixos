@@ -7,5 +7,6 @@
     docker
     docker-compose
     terraform
+    terragrunt
   ];
 }
