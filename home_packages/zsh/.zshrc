@@ -3,10 +3,19 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+function wakeup {
+        sudo pmset -a disablesleep 1;
+}
+
+function wakedown {
+        sudo pmset -a disablesleep 0;
+}
+
 #aliases
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
 alias c="clear"
+alias ..="cd .."
 alias n="nvim"
 alias py="python3"
 alias pm="sudo pacman --noconfirm"
@@ -25,10 +34,10 @@ bindkey -s "^L" 'ls -la^M'
 bindkey -s "^U" 'c^M'
 bindkey -s "^Y" 'yazi^M'
 bindkey -s "^B" 'btop^M'
-bindkey -s "^E" 'nv ^M'
+# bindkey -s "^E" 'nv ^M'
 bindkey -s "^Z" 'fg^M'
 bindkey -s "^N" 'fastfetch^M'
-bindkey -s "^D" 'df -h^M'
+# bindkey -s "^D" 'df -h^M'
 bindkey -s "^T" 'du .^M'
 bindkey -s "^P" 'clear && pokemon-colorscripts -r -b^M'
 

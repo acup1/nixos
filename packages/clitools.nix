@@ -9,11 +9,14 @@
 
     bat
     neovim
+    zellij
 
     fastfetch
     cmatrix
     pipes-rs
 
     comma
+
+    yq
   ];
 }
