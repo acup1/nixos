@@ -1,7 +1,7 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   environment.systemPackages = with pkgs; [
     #docs
-    libreoffice-qt6-fresh
+    libreoffice-qt-stable
     wpsoffice-cn
     typst
 

@@ -1,9 +1,4 @@
-{
-  inputs,
-  pkgs,
-  services,
-  ...
-}: {
+{ inputs, pkgs, services, ... }: {
   environment.systemPackages = with pkgs; [
     xwayland-satellite
     slurp
@@ -12,6 +7,7 @@
     iio-niri
     maliit-keyboard
     maliit-framework
+    gnomeExtensions.screen-rotate
   ];
   environment.sessionVariables = {
     MALIIT_PLUGINS_DIR = "${pkgs.maliit-keyboard}/lib/maliit/plugins";
@@ -25,9 +21,9 @@
   xdg.portal = {
     enable = true;
     config = {
-      common.default = ["gtk"];
+      common.default = [ "gtk" ];
       driftwm = {
-        default = ["gtk"];
+        default = [ "gtk" ];
         "org.freedesktop.impl.portal.ScreenCast" = "wlr";
         "org.freedesktop.impl.portal.Screenshot" = "wlr";
         "org.freedesktop.impl.portal.Inhibit" = "none";
@@ -48,4 +44,9 @@
     ];
   };
   # services.gnome.xdg-desktop-portal-gnome.enable = true;
+
+  services = {
+    desktopManager.gnome.enable = true;
+    displayManager.gdm.enable = true;
+  };
 }
