@@ -8,26 +8,31 @@
     xwayland-satellite
     slurp
     grim
+    wl-clipboard
     iio-niri
     maliit-keyboard
     maliit-framework
   ];
   environment.sessionVariables = {
     MALIIT_PLUGINS_DIR = "${pkgs.maliit-keyboard}/lib/maliit/plugins";
-    XDG_CURRENT_DESKTOP = "niri";
     NIXOS_OZONE_WL = "1";
   };
 
+  programs.driftwm.enable = true;
   programs.niri.enable = true;
   # programs.niri.package = inputs.niri.packages.${pkgs.system}.niri;
 
   xdg.portal = {
     enable = true;
-    config.common.default = [
-      # "gnome"
-      # "hyprland"
-      "gtk"
-    ];
+    config = {
+      common.default = ["gtk"];
+      driftwm = {
+        default = ["gtk"];
+        "org.freedesktop.impl.portal.ScreenCast" = "wlr";
+        "org.freedesktop.impl.portal.Screenshot" = "wlr";
+        "org.freedesktop.impl.portal.Inhibit" = "none";
+      };
+    };
     wlr.enable = true;
     wlr.settings = {
       screencast = {

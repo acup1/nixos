@@ -1,0 +1,167 @@
+mod_key = "super"
+focus_follows_mouse = true
+autostart = [
+  "dms run",
+]
+
+[env]
+NIXOS_OZONE_WL = "1"
+
+[input.keyboard]
+layout = "us,ru"
+options = "grp:win_space_toggle,compose:ralt,ctrl:nocaps"
+num_lock = true
+layout_independent = true
+
+[input.trackpad]
+tap_to_click = true
+click_method = "clickfinger"
+
+[cursor]
+theme = "default"
+size = 24
+
+[navigation]
+camera_speed = 0.3
+
+[snap]
+gap = 6.0
+
+[decorations]
+corner_radius = 6
+border_width = 2
+border_color = "#555555"
+border_color_focused = "#ffffff"
+shadow = true
+
+[effects]
+blur_radius = 2
+blur_strength = 1.1
+
+[background]
+type = "none"
+
+[keybindings]
+"mod+q" = "exec ghostty"
+"mod+c" = "close-window"
+"mod+x" = "spawn dms ipc call spotlight toggle"
+"mod+shift+e" = "spawn dms ipc call powermenu toggle"
+
+"mod+left" = "center-nearest left"
+"mod+down" = "center-nearest down"
+"mod+up" = "center-nearest up"
+"mod+right" = "center-nearest right"
+"mod+h" = "center-nearest left"
+"mod+j" = "center-nearest down"
+"mod+k" = "center-nearest up"
+"mod+l" = "center-nearest right"
+
+"mod+ctrl+left" = "nudge-window left"
+"mod+ctrl+down" = "nudge-window down"
+"mod+ctrl+up" = "nudge-window up"
+"mod+ctrl+right" = "nudge-window right"
+"mod+ctrl+h" = "nudge-window left"
+"mod+ctrl+j" = "nudge-window down"
+"mod+ctrl+k" = "nudge-window up"
+"mod+ctrl+l" = "nudge-window right"
+
+"mod+shift+left" = "send-to-output left"
+"mod+shift+down" = "send-to-output down"
+"mod+shift+up" = "send-to-output up"
+"mod+shift+right" = "send-to-output right"
+"mod+shift+h" = "send-to-output left"
+"mod+shift+j" = "send-to-output down"
+
+"mod+home" = "home-toggle"
+"mod+f" = "fit-window"
+"mod+shift+f" = "toggle-fullscreen"
+"mod+ctrl+f" = "fill-window"
+"mod+v" = "toggle-pin-to-screen"
+"mod+r" = "zoom-reset"
+"mod+minus" = "zoom-out"
+"mod+equal" = "zoom-in"
+"mod+w" = "zoom-to-fit"
+
+"mod+1" = "go-to-bookmark 1"
+"mod+2" = "go-to-bookmark 2"
+"mod+3" = "go-to-bookmark 3"
+"mod+4" = "go-to-bookmark 4"
+"mod+shift+1" = "set-bookmark 1"
+"mod+shift+2" = "set-bookmark 2"
+"mod+shift+3" = "set-bookmark 3"
+"mod+shift+4" = "set-bookmark 4"
+
+"XF86AudioRaiseVolume" = "spawn wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0"
+"XF86AudioLowerVolume" = "spawn wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"
+"XF86AudioMute" = "spawn wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+"XF86AudioMicMute" = "spawn wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+"XF86AudioPlay" = "spawn playerctl play-pause"
+"XF86AudioStop" = "spawn playerctl stop"
+"XF86AudioPrev" = "spawn playerctl previous"
+"XF86AudioNext" = "spawn playerctl next"
+"XF86MonBrightnessUp" = "spawn brightnessctl --class=backlight set +10%"
+"XF86MonBrightnessDown" = "spawn brightnessctl --class=backlight set 10%-"
+
+"Print" = "spawn grim - | wl-copy"
+"shift+Print" = "spawn grim -g \"$(slurp -d)\" - | wl-copy"
+"alt+Print" = "spawn driftwm msg screenshot window -o - | wl-copy"
+
+"mod+shift+p" = "spawn playerctl play-pause"
+"mod+shift+i" = "spawn playerctl previous"
+"mod+shift+o" = "spawn playerctl next"
+"mod+shift+k" = "spawn wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+"mod+shift+l" = "spawn wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
+
+"mod+shift+slash" = "none"
+"ctrl+alt+delete" = "quit"
+
+[mouse.on-window]
+"mod+left" = "move-window"
+"alt+left" = "move-window"
+"alt+right" = "resize-window"
+
+[gestures.on-window]
+"3-finger-doubletap-swipe" = "resize-window"
+"4-finger-doubletap-swipe" = "move-window"
+
+[mouse.anywhere]
+"mod+wheel-scroll" = "zoom"
+"mod+trackpad-scroll" = "pan-viewport"
+
+[[outputs]]
+name = "DP-1"
+mode = "2560x1440@60"
+scale = 1.5
+position = [0, 0]
+
+[[outputs]]
+name = "eDP-1"
+mode = "1920x1080@60"
+scale = 1.25
+position = [0, 960]
+
+[[outputs]]
+name = "HDMI-A-1"
+mode = "1920x1080@60"
+scale = 1.0
+position = [1536, 960]
+
+[[window_rules]]
+app_id = "com.mitchellh.ghostty"
+blur = true
+corner_radius = 6
+
+[[window_rules]]
+app_id = "zen"
+blur = true
+corner_radius = 6
+
+[[window_rules]]
+title = "Picture-in-Picture"
+pinned_to_screen = true
+
+[[window_rules]]
+app_id = "dms:*"
+blur = true
+corner_radius = 6
+shadow = true

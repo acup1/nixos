@@ -22,6 +22,9 @@
         # submodules = true;
         inputs.nixpkgs.follows = "nixpkgs";
       };
+
+      driftwm.url = "github:malbiruk/driftwm";
+
       # hyprgrass = {
       #   url = "github:horriblename/hyprgrass";
       #   inputs.hyprland.follows = "hyprland";
@@ -70,6 +73,7 @@
         [
           ./programs/default.nix
         ]
+        ++ [inputs.driftwm.nixosModules.default]
         ++ (nixpkgs.lib.filesystem.listFilesRecursive ./configuration)
         ++ (inputs.nixpkgs.lib.filesystem.listFilesRecursive ./packages)
         ++ (nixpkgs.lib.filesystem.listFilesRecursive ./modules)
