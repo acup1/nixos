@@ -4,14 +4,15 @@
   inputs,
   ...
 }: let
+  hostSystem = pkgs.stdenv.hostPlatform.system;
 in {
   home.packages = with pkgs; [
-    inputs.iio-hyprland.packages.${pkgs.system}.default
+    inputs.iio-hyprland.packages.${hostSystem}.default
     squeekboard
   ];
   wayland.windowManager.hyprland = {
     enable = true;
-    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+    package = inputs.hyprland.packages.${hostSystem}.hyprland;
 
     extraConfig = ''
       source = dms/binds.conf
@@ -25,8 +26,8 @@ in {
     };
 
     plugins = [
-      # inputs.hyprgrass.packages.${pkgs.system}.default
-      # inputs.Hyprspace.packages.${pkgs.system}.Hyprspace
+      # inputs.hyprgrass.packages.${hostSystem}.default
+      # inputs.Hyprspace.packages.${hostSystem}.Hyprspace
     ];
   };
   # xdg.configFile."hypr".source = ./.config/hypr;

@@ -3,7 +3,7 @@
     enable = true;
     man = {
       enable = true;
-      generateCaches = true;
+      cache.enable = true;
     };
     dev.enable = true;
   };

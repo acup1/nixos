@@ -2,5 +2,5 @@
 dark = "kanagawa"
 [filetype]
 rules = [
-	{ name = "*/", fg = "#ffffff" },
+	{ url = "*/", fg = "#ffffff" },
 ]
