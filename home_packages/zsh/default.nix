@@ -32,5 +32,10 @@
     '';
   };
 
-  home.packages = with pkgs; [starship pokemon-colorscripts];
+  programs.starship = {
+    enable = true;
+    settings.scan_timeout = 1000;
+  };
+
+  home.packages = with pkgs; [ pokemon-colorscripts ];
 }

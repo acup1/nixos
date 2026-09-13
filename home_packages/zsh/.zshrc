@@ -37,5 +37,3 @@ export EDITOR=nvim
 export SHELL=zsh
 
 source $HOME/.secrets.sh
-
-eval "$(starship init zsh)"
