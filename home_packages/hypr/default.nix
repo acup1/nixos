@@ -6,21 +6,6 @@
 }: let
   hostSystem = pkgs.stdenv.hostPlatform.system;
   hyprland = inputs.hyprland.packages.${hostSystem}.hyprland;
-  sunshineHeadless = pkgs.writeShellScript "sunshine-headless" ''
-    set -eu
-
-    if ! ${hyprland}/bin/hyprctl monitors all \
-      | ${pkgs.gnugrep}/bin/grep -q '^Monitor SUNSHINE '; then
-      ${hyprland}/bin/hyprctl output create headless SUNSHINE
-    fi
-
-    # При старте без разъёмов Hyprland сам создаёт временный HEADLESS-0.
-    # После появления именованного выхода он больше не нужен.
-    if ${hyprland}/bin/hyprctl monitors all \
-      | ${pkgs.gnugrep}/bin/grep -q '^Monitor HEADLESS-0 '; then
-      ${hyprland}/bin/hyprctl output remove HEADLESS-0
-    fi
-  '';
 in {
   home.packages = with pkgs; [
     inputs.iio-hyprland.packages.${hostSystem}.default
@@ -47,11 +32,6 @@ in {
         "WAYLAND_DISPLAY"
         "XDG_CURRENT_DESKTOP"
         "XDG_SESSION_TYPE"
-      ];
-      extraCommands = [
-        "${pkgs.systemd}/bin/systemctl --user stop hyprland-session.target"
-        "${sunshineHeadless}"
-        "${pkgs.systemd}/bin/systemctl --user start hyprland-session.target"
       ];
     };
 
