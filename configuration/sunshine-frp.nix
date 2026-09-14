@@ -27,19 +27,41 @@
         level = "info";
       };
 
-      proxies = map (port: {
-        name = "sunshine-udp-${toString port}";
-        type = "udp";
-        localIP = "127.0.0.1";
-        localPort = port;
-        remotePort = port;
-      }) [
-        47998
-        47999
-        48000
-        48002
-        48010
-      ];
+      proxies =
+        map (port: {
+          name = "sunshine-udp-${toString port}";
+          type = "udp";
+          localIP = "127.0.0.1";
+          localPort = port;
+          remotePort = port;
+        }) [
+          47998
+          47999
+          48000
+          48002
+          48010
+        ]
+        ++ map (port: {
+          name = "sunshine-tcp-${toString port}";
+          type = "tcp";
+          localIP = "127.0.0.1";
+          localPort = port;
+          remotePort = port;
+        }) [
+          47984
+          47989
+          47990
+          48010
+        ]
+        ++ [
+          {
+            name = "ssh-tcp-2224";
+            type = "tcp";
+            localIP = "127.0.0.1";
+            localPort = 22;
+            remotePort = 2224;
+          }
+        ];
     };
   };
 }
