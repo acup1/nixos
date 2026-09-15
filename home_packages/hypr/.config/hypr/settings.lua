@@ -14,6 +14,7 @@ hl.monitor({
 
 hl.monitor({
   output = "SUNSHINE",
+  -- Fallback before Sunshine applies the Moonlight client's mode.
   mode = "1920x1080@60",
   position = "0x0",
   scale = "1",
@@ -48,7 +49,7 @@ hl.config({
     shadow = {
       enabled = false,
       range = 10,
-      render_power = 10,
+      render_power = 4,
       color = "rgba(ffffffff)",
     },
     blur = {

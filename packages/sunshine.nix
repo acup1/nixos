@@ -1,14 +1,36 @@
 {
+  inputs,
   pkgs,
   username,
   ...
 }: let
+  hostSystem = pkgs.stdenv.hostPlatform.system;
+  hyprland = inputs.hyprland.packages.${hostSystem}.hyprland;
+
+  sunshineClientMode = pkgs.writeShellScript "sunshine-client-mode" ''
+    set -eu
+
+    stream_width="''${SUNSHINE_CLIENT_WIDTH:-1920}"
+    stream_height="''${SUNSHINE_CLIENT_HEIGHT:-1080}"
+    stream_fps="''${SUNSHINE_CLIENT_FPS:-60}"
+
+    ${hyprland}/bin/hyprctl keyword monitor \
+      "SUNSHINE,''${stream_width}x''${stream_height}@''${stream_fps},0x0,1"
+  '';
+
+  sunshineDefaultMode = pkgs.writeShellScript "sunshine-default-mode" ''
+    set -eu
+
+    ${hyprland}/bin/hyprctl keyword monitor \
+      'SUNSHINE,1920x1080@60,0x0,1'
+  '';
+
   sunshineHeadless = pkgs.writeShellScript "sunshine-headless" ''
     set -eu
 
     ready=0
     for attempt in $(${pkgs.coreutils}/bin/seq 1 50); do
-      if ${pkgs.hyprland}/bin/hyprctl monitors all >/dev/null 2>&1; then
+      if ${hyprland}/bin/hyprctl monitors all >/dev/null 2>&1; then
         ready=1
         break
       fi
@@ -20,17 +42,16 @@
       exit 1
     fi
 
-    if ! ${pkgs.hyprland}/bin/hyprctl monitors all \
+    if ! ${hyprland}/bin/hyprctl monitors all \
       | ${pkgs.gnugrep}/bin/grep -q '^Monitor SUNSHINE '; then
-      ${pkgs.hyprland}/bin/hyprctl output create headless SUNSHINE
+      ${hyprland}/bin/hyprctl output create headless SUNSHINE
     fi
 
-    ${pkgs.hyprland}/bin/hyprctl keyword monitor \
-      'SUNSHINE,1920x1080@60,0x0,1'
+    ${sunshineDefaultMode}
 
-    if ${pkgs.hyprland}/bin/hyprctl monitors all \
+    if ${hyprland}/bin/hyprctl monitors all \
       | ${pkgs.gnugrep}/bin/grep -q '^Monitor HEADLESS-0 '; then
-      ${pkgs.hyprland}/bin/hyprctl output remove HEADLESS-0
+      ${hyprland}/bin/hyprctl output remove HEADLESS-0
     fi
   '';
 in {
@@ -56,6 +77,12 @@ in {
     settings = {
       capture = "wlr";
       output_name = "SUNSHINE";
+      global_prep_cmd = builtins.toJSON [
+        {
+          do = "${sunshineClientMode}";
+          undo = "${sunshineDefaultMode}";
+        }
+      ];
       csrf_allowed_origins =
         "https://nixos:47990,https://nixos.local:47990,https://192.168.0.2:47990,https://ru.cupscloud.ru:4799,https://ru.cupscloud.ru:47990";
     };
