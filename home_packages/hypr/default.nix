@@ -1,6 +1,5 @@
 {
   pkgs,
-  config,
   inputs,
   ...
 }: let
@@ -14,15 +13,12 @@ in {
   wayland.windowManager.hyprland = {
     enable = true;
     package = hyprland;
-    configType = "hyprlang";
+    configType = "lua";
 
     extraConfig = ''
-      source = dms/binds.conf
-      ${builtins.readFile ./.config/hypr/hyprland.conf}
-      ${builtins.readFile ./.config/hypr/autostart.conf}
-      ${builtins.readFile ./.config/hypr/inputnbindings.conf}
-
-      monitor = SUNSHINE, 1920x1080@60, 0x0, 1
+      ${builtins.readFile ./.config/hypr/settings.lua}
+      ${builtins.readFile ./.config/hypr/autostart.lua}
+      ${builtins.readFile ./.config/hypr/inputnbindings.lua}
     '';
     systemd = {
       enable = true;
