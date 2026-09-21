@@ -1,3 +1,3 @@
 { ... }: {
-  xdg.configFile."driftwm/config.toml".source = ./config.toml;
+  xdg.configFile."driftwm".source = ./.config/driftwm;
 }

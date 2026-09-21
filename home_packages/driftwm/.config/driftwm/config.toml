@@ -15,6 +15,7 @@ layout_independent = true
 
 [input.trackpad]
 tap_to_click = true
+natural_scroll = false
 click_method = "clickfinger"
 
 [cursor]
