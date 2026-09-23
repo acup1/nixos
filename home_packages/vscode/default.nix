@@ -11,16 +11,44 @@
   toggleTerminal = "workbench.action.terminal.toggleTerminal";
   terminalWhen = "terminalFocus || (editorTextFocus && vim.active && !inDebugRepl)";
 in {
-  nixpkgs.config.allowUnfreePredicate = pkg: lib.getName pkg == "vscode";
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "vscode"
+      "vscode-extension-vira-vsc-vira-theme"
+    ];
 
   programs.vscode = {
     enable = true;
     package = pkgs.vscode;
 
     profiles.default = {
-      extensions = [pkgs.vscode-extensions.vscodevim.vim];
+      extensions =
+        [pkgs.vscode-extensions.vscodevim.vim]
+        ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+          {
+            publisher = "rocketseat";
+            name = "theme-omni";
+            version = "1.0.12";
+            hash = "sha256-rZzyMc9iCVjEFmWCiLuKqohBwSbqoKEYRR2Bn5f6dbU=";
+            meta.license = lib.licenses.mit;
+          }
+          {
+            publisher = "vira";
+            name = "vsc-vira-theme";
+            version = "2026.9.2";
+            hash = "sha256-lAXdlpTLWZX2Ej2y42i1YV8fqCMJYM+jJHsBkIykhpA=";
+            meta.license = lib.licenses.unfree;
+          }
+        ];
 
       userSettings = {
+        "workbench.colorTheme" = "Omni";
+        "workbench.iconTheme" = "vira-icons-palenight";
+        "workbench.productIconTheme" = "viraUIIcons";
+        # Keep the chosen Vira icons independent of the Omni color theme.
+        "viraTheme.syncThemesAndIcons" = false;
+        "viraTheme.syncProductIcons" = false;
+
         "editor.tabSize" = 2;
         "editor.insertSpaces" = true;
         "editor.detectIndentation" = false;
