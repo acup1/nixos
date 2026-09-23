@@ -20,7 +20,7 @@ in {
       };
       ui.borders.enable = true;
 
-      luaConfigRC.mini-comment = entryAnywhere ''
+      luaConfigRC.mini-comment = entryAfter ["globalsScript"] ''
         require("mini.comment").setup({
           mappings = {
             comment = "<leader>/",
@@ -38,7 +38,7 @@ in {
         softtabstop = 2;
       };
       dashboard.alpha.enable = true;
-      luaConfigRC.alpha-custom = entryAnywhere ''
+      lazy.plugins.alpha-nvim.after = ''
         local alpha = require("alpha")
         local dashboard = require("alpha.themes.dashboard")
 
@@ -116,13 +116,6 @@ in {
           return orig_open_win(buf, enter, opts)
         end
       '';
-      luaConfigRC.toggleterm-borders = entryAnywhere ''
-        require("toggleterm").setup({
-          float_opts = {
-            border = "rounded",
-          },
-        })
-      '';
 
       extraPlugins = {
         nvim-colorizer = {
@@ -174,15 +167,14 @@ in {
         })
       '';
 
-      luaConfigRC.sql-format = entryAnywhere ''
+      lazy.plugins.conform-nvim.after = ''
         local conform = require("conform")
         conform.formatters.sqlfluff = {
           command = "sqlfluff-tsql",
           stdin = false,
         }
         conform.formatters_by_ft.sql = { "sqlfluff" }
-      '';
-      luaConfigRC.conform-timeout = entryAnywhere ''
+
         require("conform").setup({
           format_on_save = {
             timeout_ms = 10000,
@@ -209,6 +201,7 @@ in {
 
       terminal.toggleterm = {
         enable = true;
+        setupOpts.float_opts.border = "rounded";
         lazygit.enable = true;
       };
 
@@ -277,7 +270,7 @@ in {
           enable = true;
           lsp.enable = true;
           format.enable = true;
-          format.type = "sqlfluff";
+          format.type = ["sqlfluff"];
           treesitter.enable = true;
         };
         rust = {
@@ -304,6 +297,12 @@ in {
           treesitter.enable = true;
           format.enable = true;
         };
+        hcl = {
+          enable = true;
+          lsp.enable = true;
+          treesitter.enable = true;
+          format.enable = true;
+        };
         tex = {
           enable = true;
           lsp.enable = true;
@@ -315,6 +314,12 @@ in {
           lsp.enable = true;
           treesitter.enable = true;
           #format.enable = true;
+        };
+        json = {
+          enable = true;
+          # lsp.enable = true;
+          treesitter.enable = true;
+          format.enable = true;
         };
       };
 

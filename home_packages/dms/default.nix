@@ -1,72 +1,138 @@
-{...}: {
-  programs.dank-material-shell.settings = {
-    blurEnabled = true;
-    blurForegroundLayers = true;
-    blurLayerOutlineOpacity = 0.12;
-    blurBorderOpacity = 0.35;
-    popupTransparency = 0.82;
-    dockTransparency = 0.82;
+{config, ...}: {
+  xdg.configFile."DankMaterialShell/themes/amoledBlack/theme.json".source =
+    ./themes/amoledBlack/theme.json;
 
+  programs.dank-material-shell.settings = {
+    currentThemeName = "custom";
+    currentThemeCategory = "registry";
+    customThemeFile = "${config.xdg.configHome}/DankMaterialShell/themes/amoledBlack/theme.json";
+    registryThemeVariants = {
+      amoledBlack = {
+        dark = {
+          flavor = "black";
+          accent = "white";
+        };
+      };
+    };
+    popupTransparency = 0.4;
+    dockTransparency = 0.4;
+    m3ElevationEnabled = false;
+    barElevationEnabled = false;
+    blurEnabled = true;
+    blurLayerOutlineOpacity = 0;
+    blurBorderEnabled = false;
+    launcherStyle = "island";
+    screenPreferences = {
+      wallpaper = ["all"];
+    };
     barConfigs = [
       {
-        id = "default";
-        name = "Main Bar";
+        autoHide = false;
+        autoHideDelay = 250;
+        borderColor = "surfaceText";
+        borderEnabled = false;
+        borderOpacity = 1;
+        borderThickness = 1;
+        bottomGap = 0;
+        centerWidgets = ["music" "clock"];
+        clickThrough = false;
         enabled = true;
+        fontScale = 1.11;
+        gothCornerRadiusOverride = false;
+        gothCornerRadiusValue = 12;
+        gothCornersEnabled = false;
+        iconScale = 1;
+        id = "default";
+        innerPadding = 1;
+        leftWidgets = ["launcherButton"];
+        maximizeDetection = true;
+        maximizeWidgetIcons = false;
+        maximizeWidgetText = false;
+        name = "Main Bar";
+        noBackground = false;
+        openOnOverview = false;
+        popupGapsAuto = true;
+        popupGapsManual = 4;
         position = 0;
-        screenPreferences = ["all"];
-        showOnLastDisplay = true;
-        leftWidgets = ["launcherButton" "workspaceSwitcher" "focusedWindow"];
-        centerWidgets = ["music" "clock" "weather"];
+        removeWidgetPadding = false;
         rightWidgets = [
           "systemTray"
           "clipboard"
-          "cpuUsage"
-          "memUsage"
           "notificationButton"
           "battery"
           "controlCenterButton"
+          {
+            id = "powerMenuButton";
+            enabled = true;
+          }
         ];
-        spacing = 4;
-        innerPadding = 4;
-        bottomGap = 0;
-        transparency = 0.82;
-        widgetTransparency = 0.82;
-        squareCorners = false;
-        noBackground = false;
-        maximizeWidgetIcons = false;
-        maximizeWidgetText = false;
-        removeWidgetPadding = false;
-        widgetPadding = 8;
-        gothCornersEnabled = false;
-        gothCornerRadiusOverride = false;
-        gothCornerRadiusValue = 12;
-        borderEnabled = false;
-        borderColor = "surfaceText";
-        borderOpacity = 1.0;
-        borderThickness = 1;
-        widgetOutlineEnabled = false;
-        widgetOutlineColor = "primary";
-        widgetOutlineOpacity = 1.0;
-        widgetOutlineThickness = 1;
-        fontScale = 1.0;
-        iconScale = 1.0;
-        autoHide = false;
-        autoHideDelay = 250;
-        showOnWindowsOpen = false;
-        openOnOverview = false;
-        visible = true;
-        popupGapsAuto = true;
-        popupGapsManual = 4;
-        maximizeDetection = true;
+        screenPreferences = ["all"];
         scrollEnabled = true;
         scrollXBehavior = "column";
         scrollYBehavior = "workspace";
-        shadowIntensity = 0;
-        shadowOpacity = 60;
         shadowColorMode = "text";
         shadowCustomColor = "#000000";
-        clickThrough = false;
+        shadowIntensity = 0;
+        shadowOpacity = 60;
+        showOnLastDisplay = true;
+        showOnWindowsOpen = false;
+        spacing = 4;
+        squareCorners = false;
+        transparency = 0.26;
+        visible = true;
+        widgetOutlineColor = "primary";
+        widgetOutlineEnabled = false;
+        widgetOutlineOpacity = 1;
+        widgetOutlineThickness = 1;
+        widgetPadding = 9;
+        widgetTransparency = 1;
+        attachToScreenEdge = false;
+        batteryColorMode = "level";
+        barInsetPadding = 4;
+        barLengthPadding = 143;
+        island = false;
       }
     ];
+    desktopClockCustomColor = {
+      r = 1;
+      g = 1;
+      b = 1;
+      a = 1;
+      hsvHue = -1;
+      hsvSaturation = 0;
+      hsvValue = 1;
+      hslHue = -1;
+      hslSaturation = 0;
+      hslLightness = 1;
+      valid = true;
+    };
+    systemMonitorCustomColor = {
+      r = 1;
+      g = 1;
+      b = 1;
+      a = 1;
+      hsvHue = -1;
+      hsvSaturation = 0;
+      hsvValue = 1;
+      hslHue = -1;
+      hslSaturation = 0;
+      hslLightness = 1;
+      valid = true;
+    };
+    builtInPluginSettings = {
+      dms_settings_search = {
+        trigger = "?";
+      };
+      dms_clipboard_search = {
+        trigger = "cb";
+      };
+      dms_power = {
+        trigger = "pw";
+      };
+      dms_qr_generator = {
+        trigger = "qrg";
+      };
+    };
+    configVersion = 18;
   };
 }

@@ -12,9 +12,11 @@ This repository is a Nix flake for one NixOS host and one Home Manager profile. 
 - `modules/`: additional reusable NixOS modules.
 - `grub_themes/`: theme assets and packaging for GRUB.
 
-There is no dedicated test directory; validate through Nix evaluation and builds.
+There is no dedicated test directory. Use static inspection and syntax checks for routine changes; configuration builds require an explicit user request.
 
 ## Build, Test & Development Commands
+
+The build and flake-check commands below are for use only when explicitly requested by the user. Do not run them automatically as part of an edit, review, or PR.
 
 - `nix flake check`: evaluate flake outputs and catch module or lockfile issues.
 - `nixos-rebuild build --flake .#nixos`: build the system closure without switching to it.
@@ -31,7 +33,9 @@ Keep host constants aligned with `flake.nix` (`username = "acup"`, `system = "x8
 
 ## Testing Guidelines
 
-Before opening a PR or switching locally, run `nix flake check` plus the relevant build command. Use `nixos-rebuild build --flake .#nixos` for system changes and `home-manager build --flake .#acup` for Home Manager changes. For custom packages under `programs/` or `home_packages/`, ensure they evaluate through the parent configuration.
+Do not build NixOS or Home Manager configurations unless the user explicitly requests a build. This includes `nixos-rebuild build`, `home-manager build`, and `nix build` of configuration outputs. Do not run `nix flake check` automatically either, since it can trigger builds.
+
+For routine changes, inspect the diff, run `git diff --check`, and use syntax-only checks such as `nix-instantiate --parse` when useful. Do not start configuration builds merely to validate a change or prepare a PR. Keep custom modules reachable from their parent configuration through static inspection. If the user explicitly requests validation by building, use the relevant command above and report its result.
 
 ## Commit & Pull Request Guidelines
 

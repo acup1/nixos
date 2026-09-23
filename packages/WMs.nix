@@ -14,7 +14,14 @@
     NIXOS_OZONE_WL = "1";
   };
 
-  programs.driftwm.enable = true;
+  programs.driftwm = {
+    enable = true;
+    package = inputs.driftwm.packages.${pkgs.stdenv.hostPlatform.system}.default.overrideAttrs (old: {
+      patches = (old.patches or []) ++ [
+        ../home_packages/driftwm/patches/overview-focus.patch
+      ];
+    });
+  };
   programs.niri.enable = true;
   # programs.niri.package = inputs.niri.packages.${pkgs.system}.niri;
 
