@@ -1,4 +1,9 @@
-{ pkgs, inputs, system, ... }: {
+{
+  pkgs,
+  inputs,
+  system,
+  ...
+}: {
   environment.systemPackages = with pkgs; [
     hyprland
     cliphist
@@ -44,5 +49,5 @@
       };
     })
   ];
-  nixpkgs.config.permittedInsecurePackages = [ "qtwebengine-5.15.19" ];
+  nixpkgs.config.permittedInsecurePackages = ["qtwebengine-5.15.19"];
 }
