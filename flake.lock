@@ -804,11 +804,11 @@
         "nixpkgs": "nixpkgs_5"
       },
       "locked": {
-        "lastModified": 1790202566,
-        "narHash": "sha256-F1mQAsIh/6K/iHFzUZKJSVxm/wdKPrWf+yzdlOaS0Ew=",
+        "lastModified": 1790204731,
+        "narHash": "sha256-TL7k76r5lkeT+ChGiBjqzEo8Vb750os4qJHyfnr9hPo=",
         "owner": "acup1",
         "repo": "waylandkb",
-        "rev": "e0653517e3074682e3b23779762f508165eaef61",
+        "rev": "1582b640f7f4b7e2d3aa84193beb81becb8f2587",
         "type": "github"
       },
       "original": {
