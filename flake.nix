@@ -25,6 +25,9 @@
 
       driftwm.url = "github:malbiruk/driftwm";
 
+      # Keep the upstream Rust/GTK stack pinned independently.
+      waylandkb.url = "github:acup1/waylandkb";
+
       # hyprgrass = {
       #   url = "github:horriblename/hyprgrass";
       #   inputs.hyprland.follows = "hyprland";

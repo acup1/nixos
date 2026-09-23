@@ -679,6 +679,22 @@
         "type": "github"
       }
     },
+    "nixpkgs_5": {
+      "locked": {
+        "lastModified": 1788039129,
+        "narHash": "sha256-pa4Q0qErvCvzCaaUph7Sm37RhR4xvPrYI8Lgz6k85+A=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "d2f67949798825fe853f7c5d0492b8bf016d3f88",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nvf": {
       "inputs": {
         "flake-compat": "flake-compat_4",
@@ -734,6 +750,7 @@
         "nix-matlab": "nix-matlab",
         "nixpkgs": "nixpkgs_4",
         "nvf": "nvf",
+        "waylandkb": "waylandkb",
         "winapps": "winapps"
       }
     },
@@ -779,6 +796,24 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "waylandkb": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_5"
+      },
+      "locked": {
+        "lastModified": 1790202566,
+        "narHash": "sha256-F1mQAsIh/6K/iHFzUZKJSVxm/wdKPrWf+yzdlOaS0Ew=",
+        "owner": "acup1",
+        "repo": "waylandkb",
+        "rev": "e0653517e3074682e3b23779762f508165eaef61",
+        "type": "github"
+      },
+      "original": {
+        "owner": "acup1",
+        "repo": "waylandkb",
         "type": "github"
       }
     },

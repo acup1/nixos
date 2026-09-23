@@ -1,13 +1,24 @@
+diff --git a/src/input/actions.rs b/src/input/actions.rs
+index 6a0cd0e..94028ca 100644
 --- a/src/input/actions.rs
 +++ b/src/input/actions.rs
-@@ -760,5 +760,5 @@
+@@ -297,4 +297,8 @@ impl DriftWm {
+             }
+             Action::HomeToggle => {
++                // Pinch-out uses home-toggle: leave overview before navigating home.
++                if self.try_restore_overview() {
++                    return;
++                }
+                 let viewport_size = self.get_viewport_size();
+                 let zoom = self.zoom();
+@@ -760,5 +764,5 @@ impl DriftWm {
      }
 
 -    /// If an overview-return is pending, animate back to it and return true.
 +    /// Restore the pre-overview zoom around the currently focused canvas window.
      fn try_restore_overview(&mut self) -> bool {
          let Some((saved_camera, saved_zoom)) = self.overview_return() else {
-@@ -767,12 +767,17 @@
+@@ -767,12 +771,17 @@ impl DriftWm {
          self.set_overview_return(None);
          let vc = self.usable_center_screen();
 +        let target_camera = self
@@ -28,35 +39,54 @@
 +        self.set_camera_target(Some(target_camera));
          self.set_zoom_target(Some(saved_zoom));
          true
-@@ -781,5 +786,5 @@
+@@ -781,5 +790,5 @@ impl DriftWm {
      /// Animate zoom + camera to fit `bbox` inside the viewport. Saves the
      /// current camera/zoom into `overview_return` so the next zoom-to-fit
 -    /// press toggles back.
 +    /// press restores the zoom around the selected window, or the saved view.
      fn fit_to_bbox(&mut self, bbox: smithay::utils::Rectangle<i32, smithay::utils::Logical>) {
          let usable = self.get_usable_area();
+diff --git a/src/tests/zoom_to_fit.rs b/src/tests/zoom_to_fit.rs
+index 387c185..9cf24c1 100644
 --- a/src/tests/zoom_to_fit.rs
 +++ b/src/tests/zoom_to_fit.rs
-@@ -1,9 +1,9 @@
+@@ -1,9 +1,11 @@
 -//! `zoom-to-fit` is a camera toggle, not a mode: it saves the pre-fit camera
 -//! and zoom so a second press returns there, but any deliberate move — a pan
 -//! or a navigation — disarms that return and keeps the zoomed-out zoom
 -//! instead of restoring the saved one.
 +//! `zoom-to-fit` saves the pre-fit zoom and restores it around the selected
-+//! window on a second press, falling back to the saved camera without a canvas
-+//! selection. A deliberate pan or navigation disarms that return and keeps the
-+//! zoomed-out zoom.
++//! window on a second press or home-toggle (the default pinch-out action),
++//! falling back to the saved camera without a canvas selection. A deliberate
++//! pan or navigation disarms that return and keeps the zoomed-out zoom.
 
- use driftwm::config::{Action, Direction};
+-use driftwm::config::{Action, Direction};
 -use smithay::utils::{Logical, Point};
++use driftwm::config::{
++    Action, BindingContext, Direction, GestureConfigEntry, GestureTrigger, ThresholdAction,
++};
 +use smithay::utils::{Logical, Point, SERIAL_COUNTER};
 
  use crate::state::StageWindow;
-@@ -96,5 +96,37 @@
+@@ -95,6 +97,67 @@ fn navigating_disarms_the_fit_toggle() {
+ }
 
- #[test]
--fn a_second_press_returns_to_the_pre_fit_viewport() {
-+fn a_second_press_centers_the_new_selection_at_the_pre_fit_zoom() {
++fn four_finger_pinch_out_action(context: BindingContext) -> Action {
++    let config = super::config("");
++    let entry = config
++        .gesture_lookup(
++            &Default::default(),
++            &GestureTrigger::PinchOut { fingers: 4 },
++            context,
++        )
++        .expect("default four-finger pinch-out binding");
++    let GestureConfigEntry::Threshold(ThresholdAction::Fixed(action)) = entry else {
++        panic!("pinch-out should dispatch a fixed action");
++    };
++    action.clone()
++}
++
++fn assert_overview_exit_centers_the_new_selection(action: Action) {
 +    let mut f = Fixture::new();
 +    two_spread_windows(&mut f);
 +    f.state().set_zoom(0.75);
@@ -71,11 +101,15 @@
 +    assert!(f.state().overview_return().is_some());
 +    let selected_center = f.state().nav_center(&StageWindow::Client(left.clone()));
 +
-+    f.state().execute_action(&Action::ZoomToFit);
++    // Threshold pinch begin cancels camera motion but keeps the overview return.
++    f.state().cancel_animations();
++    f.state().execute_action(&action);
 +    settle(&mut f);
 +
 +    assert!(f.state().focused_window() == Some(left));
 +    assert!(f.state().overview_return().is_none());
++    let home_return_pending = f.state().with_output_state(|os| os.home_return.is_some());
++    assert_eq!(home_return_pending, Some(false));
 +    assert!(
 +        (f.state().zoom() - zoom_before).abs() < 1e-6,
 +        "leaving overview restores the pre-fit zoom"
@@ -88,14 +122,72 @@
 +}
 +
 +#[test]
-+fn a_second_press_without_a_selection_returns_to_the_pre_fit_viewport() {
++fn a_second_press_centers_the_new_selection_at_the_pre_fit_zoom() {
++    assert_overview_exit_centers_the_new_selection(Action::ZoomToFit);
++}
++
+ #[test]
+-fn a_second_press_returns_to_the_pre_fit_viewport() {
++fn four_finger_pinch_out_centers_the_new_selection_at_the_pre_fit_zoom() {
++    for context in [BindingContext::OnWindow, BindingContext::OnCanvas] {
++        assert_overview_exit_centers_the_new_selection(four_finger_pinch_out_action(context));
++    }
++}
++
++fn assert_overview_exit_without_a_selection_restores_the_viewport(action: Action) {
      let mut f = Fixture::new();
      two_spread_windows(&mut f);
-@@ -103,4 +135,7 @@
+@@ -103,5 +166,9 @@ fn a_second_press_returns_to_the_pre_fit_viewport() {
 
      enter_fit_view(&mut f);
+-    f.state().execute_action(&Action::ZoomToFit);
 +    f.state()
 +        .clear_focus_to_empty_canvas(SERIAL_COUNTER.next_serial());
 +    assert!(f.state().focused_element().is_none());
-     f.state().execute_action(&Action::ZoomToFit);
++    f.state().cancel_animations();
++    f.state().execute_action(&action);
      settle(&mut f);
+
+@@ -118,4 +185,42 @@ fn a_second_press_returns_to_the_pre_fit_viewport() {
+ }
+
++#[test]
++fn a_second_press_without_a_selection_returns_to_the_pre_fit_viewport() {
++    assert_overview_exit_without_a_selection_restores_the_viewport(Action::ZoomToFit);
++}
++
++#[test]
++fn four_finger_pinch_out_without_a_selection_returns_to_the_pre_fit_viewport() {
++    for context in [BindingContext::OnWindow, BindingContext::OnCanvas] {
++        assert_overview_exit_without_a_selection_restores_the_viewport(
++            four_finger_pinch_out_action(context),
++        );
++    }
++}
++
++#[test]
++fn four_finger_pinch_out_outside_overview_toggles_home_and_back() {
++    let mut f = Fixture::new();
++    two_spread_windows(&mut f);
++    let camera_before = Point::from((5000.0, 2000.0));
++    let zoom_before = 0.75;
++    f.state().set_camera(camera_before);
++    f.state().set_zoom(zoom_before);
++    assert!(f.state().overview_return().is_none());
++    let action = four_finger_pinch_out_action(BindingContext::OnCanvas);
++
++    f.state().execute_action(&action);
++    settle(&mut f);
++    let center = f.state().viewport_center_canvas();
++    assert!(center.x.abs() < 1e-6 && center.y.abs() < 1e-6);
++    assert!((f.state().zoom() - 1.0).abs() < 1e-6);
++
++    f.state().execute_action(&action);
++    settle(&mut f);
++    let camera = f.state().camera();
++    assert!((camera.x - camera_before.x).abs() < 1e-6 && (camera.y - camera_before.y).abs() < 1e-6);
++    assert!((f.state().zoom() - zoom_before).abs() < 1e-6);
++}
++
+ /// Fitting a window straight out of fullscreen must center it like any other
+ /// fit. The exit only *sends* the smaller configure, so the client is still
